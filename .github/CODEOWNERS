@@ -1,0 +1,13 @@
+# Quem precisa aprovar cada parte do projeto.
+#
+# A proteção da branch main exige aprovação de um code owner antes do merge.
+# Com a linha abaixo, toda alteração precisa da aprovação do dono do repositório.
+#
+# Para distribuir a revisão depois, é só acrescentar linhas mais específicas.
+# A ÚLTIMA linha que casar com o arquivo é a que vale, então as regras
+# específicas vêm depois da geral:
+#
+#   apps/web/       @pessoa-do-front
+#   .github/        @gomes-leonardo
+
+* @gomes-leonardo
