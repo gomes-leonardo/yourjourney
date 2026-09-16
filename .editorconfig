@@ -1,0 +1,19 @@
+# Diz ao editor como formatar os arquivos, sem ninguém precisar configurar nada.
+# Instale a extensão EditorConfig no seu editor e ele passa a obedecer isto sozinho.
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+# Em Markdown, dois espaços no fim da linha significam quebra de linha.
+trim_trailing_whitespace = false
+
+[Makefile]
+# Make exige tabulação no começo da receita. Não é escolha, é sintaxe.
+indent_style = tab

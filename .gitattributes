@@ -1,0 +1,12 @@
+# Normaliza o fim de linha para LF em todo arquivo de texto.
+#
+# Sem isto, quem está no Windows recebe os arquivos com CRLF, e o caractere a
+# mais entra no cabeçalho dos scripts, quebrando eles com um erro que não
+# explica nada. Como o time inteiro está no Windows, isto não é detalhe.
+* text=auto eol=lf
+
+# Arquivos binários não podem ser convertidos.
+*.png binary
+*.jpg binary
+*.ico binary
+*.pdf binary
