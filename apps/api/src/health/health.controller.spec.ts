@@ -16,7 +16,10 @@ describe('HealthController', () => {
     const modulo: TestingModule = await Test.createTestingModule({
       controllers: [HealthController],
       providers: [
-        { provide: HealthService, useValue: { verificar: () => respostaDoService } },
+        {
+          provide: HealthService,
+          useValue: { verificar: () => respostaDoService },
+        },
       ],
     }).compile();
 

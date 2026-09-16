@@ -13,7 +13,9 @@ async function bootstrap() {
   // deixaria a API inalcançável de fora dele.
   await app.listen(config.porta, '0.0.0.0');
 
-  console.log(`API ouvindo em http://localhost:${config.porta} (${config.ambiente})`);
+  console.log(
+    `API ouvindo em http://localhost:${config.porta} (${config.ambiente})`,
+  );
 }
 
 await bootstrap().catch((erro: unknown) => {

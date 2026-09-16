@@ -19,15 +19,22 @@ export const envSchema = z.object({
     .default(8080),
 
   WEB_BASE_URL: z
-    .url({ error: 'precisa ser uma URL completa, por exemplo http://localhost:3000' })
+    .url({
+      error: 'precisa ser uma URL completa, por exemplo http://localhost:3000',
+    })
     .default('http://localhost:3000'),
 
   DATABASE_URL: z
     .string()
-    .min(1, { error: 'é obrigatória, e o compose já a injeta no contêiner da API' })
-    .refine((v) => v.startsWith('postgres://') || v.startsWith('postgresql://'), {
-      error: 'precisa começar com postgres:// ou postgresql://',
-    }),
+    .min(1, {
+      error: 'é obrigatória, e o compose já a injeta no contêiner da API',
+    })
+    .refine(
+      (v) => v.startsWith('postgres://') || v.startsWith('postgresql://'),
+      {
+        error: 'precisa começar com postgres:// ou postgresql://',
+      },
+    ),
 });
 
 export type Env = z.infer<typeof envSchema>;

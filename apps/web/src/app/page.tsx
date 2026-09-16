@@ -52,8 +52,8 @@ export default async function Home() {
           <>
             <p className={styles.falhou}>Nao respondeu</p>
             <p className={styles.ajuda}>
-              Tentamos <code>{API_URL}/health</code>. Rode <code>make logs-api</code>{' '}
-              para ver o motivo.
+              Tentamos <code>{API_URL}/health</code>. Rode{' '}
+              <code>make logs-api</code> para ver o motivo.
             </p>
           </>
         )}
