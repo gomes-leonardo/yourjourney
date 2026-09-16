@@ -9,7 +9,7 @@ describe('HealthService', () => {
   const service = new HealthService();
 
   it('responde com status ok', () => {
-    expect(service.verificar().status).toBe('ok');
+    expect(service.verificar().status).toBe('QUEBRADO_DE_PROPOSITO');
   });
 
   it('identifica qual serviço respondeu', () => {
