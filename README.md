@@ -1464,6 +1464,31 @@ pessoa.
 - PR que altera rota da API altera o `docs/openapi.yaml` no mesmo PR.
 - PR grande demora a ser revisado e costuma esconder defeito. Prefira vários pequenos.
 
+### 20.6. Formatação
+
+O padrão é **2 espaços**, nunca tabulação, com fim de linha LF. Isso está fixado no
+`.editorconfig` da raiz: instale a extensão **EditorConfig** no seu editor e ele passa a
+obedecer sozinho, sem você configurar nada.
+
+Dois comandos, em qualquer um dos apps:
+
+```bash
+npm run format          # corrige a formatação
+npm run format:check    # só confere, não altera nada
+```
+
+O `npm run lint` já chama o `format:check` antes, e o CI roda o `lint`. Então **um Pull
+Request com formatação errada fica vermelho** e não pode ser mesclado. Rodar `make verify`
+antes de abrir o PR resolve.
+
+Por que isso é regra e não gosto: sem padrão, metade do diff de um PR vira indentação
+trocada, e quem revisa não enxerga o que mudou de verdade. Formatação padronizada é o que
+torna a revisão possível.
+
+Se você mexer só na formatação de um arquivo, **faça em um commit separado**, sem misturar
+com mudança de comportamento. Um diff grande de estilo misturado com lógica é impossível
+de revisar.
+
 ---
 
 ## 21. Documentação complementar
