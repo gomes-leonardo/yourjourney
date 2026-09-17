@@ -17,7 +17,7 @@ WEB_PORT ?= 3000
 
 .DEFAULT_GOAL := help
 .PHONY: help setup up down restart reset ps logs logs-api logs-web logs-db \
-        health migrate migrate-revert migrate-status test lint verify sh-api sh-web psql
+        health migrate migrate-revert migrate-status migration-generate smoke test lint verify sh-api sh-web psql
 
 help: ## Mostra esta lista
 	@echo "Your Journey -- comandos disponiveis:"
@@ -72,6 +72,13 @@ migrate: ## Aplica as migracoes pendentes no banco
 
 migrate-revert: ## Desfaz a ultima migracao aplicada
 	@$(COMPOSE) exec -T api npm run migration:revert
+
+migration-generate: ## Gera a migracao a partir das entidades. Use: make migration-generate NOME=CriaTabelaX
+	@test -n "$(NOME)" || { echo "Falta o nome. Use: make migration-generate NOME=CriaTabelaUsuarios"; exit 1; }
+	@$(COMPOSE) exec -T api sh -c './node_modules/.bin/typeorm-ts-node-esm migration:generate -d src/database/data-source.ts src/database/migrations/$(NOME)' 2>&1 | sed '/^query:/d'
+
+smoke: ## Sobe tudo de verdade e confere que a aplicacao responde
+	@bash scripts/smoke.sh
 
 migrate-status: ## Mostra quais migracoes ja foram aplicadas
 	@$(COMPOSE) exec -T api npm run migration:show

@@ -18,10 +18,10 @@
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --no-file-parallelism",
-    "migration:run": "tsx ./node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts",
-    "migration:revert": "tsx ./node_modules/typeorm/cli.js migration:revert -d src/database/data-source.ts",
-    "migration:show": "tsx ./node_modules/typeorm/cli.js migration:show -d src/database/data-source.ts",
-    "migration:generate": "tsx ./node_modules/typeorm/cli.js migration:generate -d src/database/data-source.ts",
+    "migration:run": "./node_modules/.bin/typeorm-ts-node-esm migration:run -d src/database/data-source.ts",
+    "migration:revert": "./node_modules/.bin/typeorm-ts-node-esm migration:revert -d src/database/data-source.ts",
+    "migration:show": "./node_modules/.bin/typeorm-ts-node-esm migration:show -d src/database/data-source.ts",
+    "migration:generate": "./node_modules/.bin/typeorm-ts-node-esm migration:generate -d src/database/data-source.ts",
     "format:check": "prettier --check ."
   },
   "dependencies": {
@@ -47,7 +47,7 @@
     "oxlint": "^1.58.0",
     "prettier": "^3.4.2",
     "source-map-support": "^0.5.21",
-    "tsx": "^4.23.13",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.1.2"
