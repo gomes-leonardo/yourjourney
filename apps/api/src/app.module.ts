@@ -8,4 +8,3 @@ import { UsuariosModule } from './usuarios/usuarios.module.js';
   imports: [ConfigModule, DatabaseModule, HealthModule, UsuariosModule],
 })
 export class AppModule {}
-

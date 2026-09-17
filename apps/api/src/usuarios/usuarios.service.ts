@@ -54,7 +54,9 @@ export class UsuariosService {
   async criar(dto: CriarUsuarioDto): Promise<UsuarioRespostaDto> {
     const existe = await this.usuariosRepository.buscarPorEmail(dto.email);
     if (existe) {
-      throw new ConflictException('Já existe um usuário cadastrado com este e-mail.');
+      throw new ConflictException(
+        'Já existe um usuário cadastrado com este e-mail.',
+      );
     }
 
     // Em produção, a senha enviada no DTO deve ser convertida em hash (ex: bcrypt/argon2)
