@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HealthResponseDto } from './dto/health-response.dto.js';
 
-const NOME_DO_SERVICO = 'yourjourney-api';
+const SERVICE_NAME = 'yourjourney-api';
 
 /**
  * A regra. Repare que este arquivo não importa nada de HTTP: ele não conhece
@@ -10,10 +10,10 @@ const NOME_DO_SERVICO = 'yourjourney-api';
  */
 @Injectable()
 export class HealthService {
-  verificar(): HealthResponseDto {
+  check(): HealthResponseDto {
     return {
       status: 'ok',
-      service: NOME_DO_SERVICO,
+      service: SERVICE_NAME,
       uptimeSeconds: Math.floor(process.uptime()),
       timestamp: new Date().toISOString(),
     };

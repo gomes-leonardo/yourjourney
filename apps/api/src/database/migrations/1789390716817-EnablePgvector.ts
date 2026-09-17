@@ -11,8 +11,8 @@ import type { MigrationInterface, QueryRunner } from 'typeorm';
  * aquele script só executa em banco novo: quem já tinha o volume criado nunca
  * recebia a extensão. Como migração, vale para todo mundo.
  */
-export class HabilitaPgvector1789390716817 implements MigrationInterface {
-  name = 'HabilitaPgvector1789390716817';
+export class EnablePgvector1789390716817 implements MigrationInterface {
+  name = 'EnablePgvector1789390716817';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('CREATE EXTENSION IF NOT EXISTS vector');

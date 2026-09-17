@@ -9,19 +9,19 @@ describe('HealthService', () => {
   const service = new HealthService();
 
   it('responde com status ok', () => {
-    expect(service.verificar().status).toBe('ok');
+    expect(service.check().status).toBe('ok');
   });
 
   it('identifica qual serviço respondeu', () => {
-    expect(service.verificar().service).toBe('yourjourney-api');
+    expect(service.check().service).toBe('yourjourney-api');
   });
 
   it('devolve um timestamp válido em ISO 8601', () => {
-    expect(Number.isNaN(Date.parse(service.verificar().timestamp))).toBe(false);
+    expect(Number.isNaN(Date.parse(service.check().timestamp))).toBe(false);
   });
 
   it('devolve o tempo no ar como número inteiro de segundos', () => {
-    const { uptimeSeconds } = service.verificar();
+    const { uptimeSeconds } = service.check();
 
     expect(Number.isInteger(uptimeSeconds)).toBe(true);
     expect(uptimeSeconds).toBeGreaterThanOrEqual(0);
