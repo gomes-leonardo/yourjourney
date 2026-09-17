@@ -18,7 +18,7 @@ describe('HealthController', () => {
       providers: [
         {
           provide: HealthService,
-          useValue: { verificar: () => respostaDoService },
+          useValue: { check: () => respostaDoService },
         },
       ],
     }).compile();
@@ -27,6 +27,6 @@ describe('HealthController', () => {
   });
 
   it('devolve exatamente o que o service respondeu, sem alterar nada', () => {
-    expect(controller.verificar()).toEqual(respostaDoService);
+    expect(controller.check()).toEqual(respostaDoService);
   });
 });

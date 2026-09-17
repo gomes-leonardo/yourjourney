@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule as NestConfigModule } from '@nestjs/config';
 import { AppConfigService } from './app-config.service.js';
-import { validarEnv } from './env.schema.js';
+import { validateEnv } from './env.schema.js';
 
 /**
  * Global porque praticamente todo módulo precisa de configuração. Sendo
@@ -13,7 +13,7 @@ import { validarEnv } from './env.schema.js';
     NestConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      validate: validarEnv,
+      validate: validateEnv,
     }),
   ],
   providers: [AppConfigService],

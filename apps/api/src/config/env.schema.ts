@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 /**
- * O contrato das variáveis de ambiente da API.
+ * O contrato das variáveis de environment da API.
  *
  * Toda variável que a aplicação lê precisa estar declarada aqui. Esse é o
  * único lugar onde o formato dela é definido, e é o que permite falhar na
@@ -39,46 +39,46 @@ export const envSchema = z.object({
 
 export type Env = z.infer<typeof envSchema>;
 
-export const ERRO_DE_CONFIGURACAO = 'ErroDeConfiguracao';
+export const CONFIG_ERROR = 'ErroDeConfiguracao';
 
-/** Variáveis cujo valor nunca pode aparecer em mensagem de erro ou log. */
-const SEGREDOS = ['DATABASE_URL'];
+/** Variáveis cujo valor nunca pode aparecer em mensagem de error ou log. */
+const SECRETS = ['DATABASE_URL'];
 
 /**
- * Valida as variáveis de ambiente. Chamada pelo NestJS durante a subida.
+ * Valida as variáveis de environment. Chamada pelo NestJS durante a subida.
  *
- * Se algo estiver errado, lança um erro listando cada problema. A mensagem
- * nunca inclui o valor da variável, porque algumas carregam senha.
+ * Se algo estiver errado, lança um error listando cada problem. A mensagem
+ * nunca inclui o valor da variável, porque algumas carregam password.
  */
-export function validarEnv(bruto: Record<string, unknown>): Env {
-  const resultado = envSchema.safeParse(bruto);
+export function validateEnv(raw: Record<string, unknown>): Env {
+  const result = envSchema.safeParse(raw);
 
-  if (resultado.success) {
-    return resultado.data;
+  if (result.success) {
+    return result.data;
   }
 
-  const problemas = resultado.error.issues.map((problema) => {
-    const nome = String(problema.path[0] ?? '(desconhecida)');
-    const recebido = SEGREDOS.includes(nome)
+  const problems = result.error.issues.map((problem) => {
+    const name = String(problem.path[0] ?? '(desconhecida)');
+    const received = SECRETS.includes(name)
       ? ''
-      : ` Recebido: ${JSON.stringify(bruto[nome])}.`;
+      : ` Recebido: ${JSON.stringify(raw[name])}.`;
 
-    return `  - ${nome}: ${problema.message}.${recebido}`;
+    return `  - ${name}: ${problem.message}.${received}`;
   });
 
-  const erro = new Error(
+  const error = new Error(
     [
       '',
       'A API não subiu porque a configuração está incorreta.',
       '',
-      ...problemas,
+      ...problems,
       '',
       'Confira o seu arquivo .env. Se ele não existe, rode: make setup',
       '',
     ].join('\n'),
   );
 
-  erro.name = ERRO_DE_CONFIGURACAO;
+  error.name = CONFIG_ERROR;
 
-  throw erro;
+  throw error;
 }

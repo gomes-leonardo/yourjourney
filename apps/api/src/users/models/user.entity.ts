@@ -20,41 +20,44 @@ import {
  *   Validação de requisição pertence aos DTOs!
  * - Não conter regras de negócio (pertencem ao Service).
  */
-@Entity('usuarios')
-export class Usuario {
+@Entity('users')
+export class User {
   /** Chave primária (PK) gerada automaticamente como UUID v4. */
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   /** Nome do usuário. */
   @Column()
-  nome: string;
+  name: string;
 
   /** E-mail do usuário. Deve ser único no banco de dados. */
   @Column({ unique: true })
   email: string;
 
-  /** Hash da senha para autenticação (nunca armazene senhas em texto puro). */
+  /** Hash da password para autenticação (nunca armazene senhas em texto puro). */
   @Column()
-  senha_hash: string;
+  password_hash: string;
 
   /** Plano do usuário (ex: 'gratuito', 'pro'). Padrão: 'gratuito'. */
   @Column({ default: 'gratuito' })
-  plano: string;
+  plan: string;
 
   /** Saldo de créditos de processamento de materiais. Padrão: 10. */
   @Column({ default: 10 })
-  creditos_disponiveis: number;
+  available_credits: number;
 
   /** Data e hora em que o e-mail foi confirmado (nulo enquanto não confirmar). */
-  @Column({ nullable: true })
-  email_confirmado_em: Date | null;
+  // O tipo precisa ser explícito. Com `Date | null`, o TypeScript reflete a
+  // união como `Object`, e o TypeORM não consegue descobrir o tipo da coluna:
+  // DataTypeNotSupportedError: Data type "Object" ... is not supported.
+  @Column({ type: 'timestamp', nullable: true })
+  email_confirmed_at: Date | null;
 
   /** Preenchido automaticamente pelo TypeORM no momento da inserção. */
   @CreateDateColumn()
-  criado_em: Date;
+  created_at: Date;
 
   /** Atualizado automaticamente pelo TypeORM sempre que o registro for alterado. */
   @UpdateDateColumn()
-  atualizado_em: Date;
+  updated_at: Date;
 }

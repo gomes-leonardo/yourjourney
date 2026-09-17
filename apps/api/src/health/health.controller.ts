@@ -13,7 +13,7 @@ export class HealthController {
   constructor(private readonly healthService: HealthService) {}
 
   @Get()
-  verificar(): HealthResponseDto {
-    return this.healthService.verificar();
+  check(): HealthResponseDto {
+    return this.healthService.check();
   }
 }
