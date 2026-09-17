@@ -1,22 +1,23 @@
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+
 /**
  * DTO DE ENTRADA (Data Transfer Object)
  *
- * Define o contrato dos dados que o cliente (front-end) DEVE enviar ao cadastrar um usuário.
- *
- * O que ESTE ARQUIVO DEVE FAZER:
- * - Declarar apenas os campos que o cliente tem permissão de enviar na requisição HTTP.
- * - Conter as regras/tipos de validação de entrada.
- *
- * O que ESTE ARQUIVO NÃO DEVE FAZER:
- * - Não incluir campos internos do banco de dados gerados pelo servidor (como id, criado_em, creditos_disponiveis).
+ * Define o contrato dos dados enviados ao cadastrar um usuário.
  */
 export class CriarUsuarioDto {
-  /** Nome completo do usuário enviado no corpo da requisição. */
+  /** Nome completo do usuário. */
+  @IsNotEmpty({ message: 'O nome é obrigatório.' })
+  @IsString()
   nome: string;
 
-  /** E-mail válido do usuário. */
+  /** E-mail do usuário. */
+  @IsNotEmpty({ message: 'O e-mail é obrigatório.' })
+  @IsEmail({}, { message: 'Forneça um e-mail válido.' })
   email: string;
 
-  /** Senha em texto puro enviada pelo usuário (será convertida em hash pelo Service). */
+  /** Senha do usuário. */
+  @IsNotEmpty({ message: 'A senha é obrigatória.' })
+  @MinLength(6, { message: 'A senha deve ter pelo menos 6 caracteres.' })
   senha: string;
 }

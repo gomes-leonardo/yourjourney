@@ -48,7 +48,7 @@ export class Usuario {
 
   /** Data e hora em que o e-mail foi confirmado (nulo enquanto não confirmar). */
   @Column({ nullable: true })
-  email_confirmado_em: Date;
+  email_confirmado_em: Date | null;
 
   /** Preenchido automaticamente pelo TypeORM no momento da inserção. */
   @CreateDateColumn()
