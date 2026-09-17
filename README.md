@@ -874,6 +874,8 @@ Os três serviços devem aparecer como `Up`, e `postgres` e `api` com `(healthy)
 | `make migrate` | Aplica as migrações pendentes |
 | `make migrate-status` | Mostra quais migrações já foram aplicadas |
 | `make migrate-revert` | Desfaz a última migração |
+| `make migration-generate NOME=CriaTabelaX` | Gera a migração a partir das entidades |
+| `make smoke` | Sobe tudo de verdade, migra e confere que a aplicação responde |
 | `make test` | Roda os testes da API |
 | `make lint` | Confere o estilo do código nos dois apps |
 | `make verify` | Lint e testes juntos — o mesmo que o CI vai rodar |
@@ -1007,6 +1009,7 @@ pela metade.
 | O que é | O que verifica | Onde |
 | --- | --- | --- |
 | **Teste unitário** | Regras de negócio do backend: débito de créditos, validação de objetivo, transição de estado de material, distribuição de horas no roadmap, corte do texto em trechos. É o que toda issue de backend exige nos critérios de aceite. | Junto do código, em `*.spec.ts` |
+| **Smoke test** | Sobe a aplicação de verdade contra o banco, aplica as migrações e confere que ela responde. Também confere que **toda entidade tem migração**. Pega a classe de erro que lint, teste unitário e build não pegam: módulo não registrado, rota que estoura, entidade sem tabela. Roda com `make smoke`. | `scripts/smoke.sh` |
 | **Medição de qualidade do RAG** | Se a recuperação traz os trechos certos e o mapa acerta os tópicos. **Não é teste de issue**: é uma medição feita à mão contra material que o time rotulou, rodada sob comando, fora do CI. | `tests/rag/` |
 
 ### 15.1. Como testar algo que usa LLM
