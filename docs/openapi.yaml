@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Your Journey API
+  description: API da plataforma de plano de estudos adaptativo Your Journey.
+  version: 1.0.0
+
+paths:
+  /health:
+    get:
+      summary: Health check da API
+      description: Retorna o status operacional da API e o tempo no ar.
+      responses:
+        '200':
+          description: API operacional
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: yourjourney-api
+                  uptimeSeconds:
+                    type: integer
+                    example: 120
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /auth/cadastro:
+    post:
+      summary: Cadastro de aluno
+      description: |
+        Cria a conta do aluno e dispara o e-mail com o código de confirmação.
+        Não emite sessão (token JWT): o aluno só poderá autenticar após confirmar o e-mail.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroDto'
+      responses:
+        '201':
+          description: Conta criada com sucesso e e-mail de confirmação disparado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResposta'
+        '409':
+          description: E-mail já cadastrado no sistema.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroResposta'
+        '422':
+          description: Algum campo enviado está fora das regras de validação.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroValidadacaoResposta'
+
+components:
+  schemas:
+    CadastroDto:
+      type: object
+      required:
+        - nome
+        - email
+        - senha
+      properties:
+        nome:
+          type: string
+          maxLength: 100
+          example: Ana Silva
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          example: ana.silva@email.com
+        senha:
+          type: string
+          minLength: 8
+          maxLength: 72
+          pattern: '^(?=.*[0-9])'
+          description: Mínimo 8 caracteres, máximo 72, contendo pelo menos um número.
+          example: SenhaSegura123
+
+    UsuarioResposta:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d
+        nome:
+          type: string
+          example: Ana Silva
+        email:
+          type: string
+          example: ana.silva@email.com
+        plano:
+          type: string
+          example: gratuito
+        creditos_disponiveis:
+          type: integer
+          example: 10
+        email_confirmado_em:
+          type: string
+          format: date-time
+          nullable: true
+          example: null
+        criado_em:
+          type: string
+          format: date-time
+        atualizado_em:
+          type: string
+          format: date-time
+
+    ErroResposta:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 409
+        message:
+          type: string
+          example: Já existe um usuário cadastrado com este e-mail.
+        error:
+          type: string
+          example: Conflict
+
+    ErroValidadacaoResposta:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 422
+        message:
+          type: array
+          items:
+            type: string
+          example:
+            - A senha deve conter pelo menos um número.
+        error:
+          type: string
+          example: Unprocessable Entity
