@@ -75,20 +75,24 @@ cursinhos que queiram organizar o material dos seus alunos.
 Este README descreve o produto inteiro. Boa parte dele ainda é plano. O que está
 construído hoje:
 
-| | Item |
-| --- | --- |
-| pronto | Estrutura do repositório, com API e front-end separados |
-| pronto | API NestJS com `GET /health` e testes |
-| pronto | Front-end Next.js, exibindo o estado da API |
-| pronto | PostgreSQL com a extensão pgvector habilitada |
-| pronto | `compose.yaml` subindo os três serviços, com verificação de saúde |
-| pronto | `Makefile` e scripts de pré-requisito e de espera |
-| a fazer | Cadastro e autenticação |
-| a fazer | Upload de material e fila de processamento |
-| a fazer | Ingestão, mapa de conhecimento, roadmap e flashcards |
-| a fazer | Créditos e pagamento |
-| a fazer | CI/CD, deploy e rollback |
-| a fazer | Observabilidade |
+| | Item | Milestone |
+| --- | --- | --- |
+| pronto | Estrutura do repositório, API e front-end separados, PostgreSQL com pgvector | 01 |
+| pronto | `compose.yaml`, `Makefile` e scripts de pré-requisito e de espera | 01 |
+| pronto | Configuração tipada e validada na subida da API | 01 |
+| pronto | TypeORM com migrações versionadas | 01 |
+| pronto | Estrutura MVC da API | 01 |
+| pronto | CI no GitHub Actions, com lint, testes e **smoke test obrigatório** | 01 |
+| pronto | Proteção da branch `main`, com revisão e checks obrigatórios | 01 |
+| pronto | Tabela de usuários e cadastro em `/auth/cadastro`, com hash de senha | 02 |
+| pronto | Usuário atual, com guarda e decorator | 02 |
+| pronto | Matriz de referência do ENEM, com 154 tópicos | 03 |
+| pronto | Tabela de objetivo de estudo | 03 |
+| a fazer | Sessão com JWT, refresh e cookies, e confirmação de e-mail | 02 |
+| a fazer | Upload de material, fila, ingestão e mapa de conhecimento | 03 |
+| a fazer | Roadmap e flashcards | 04 |
+| a fazer | Créditos e pagamento | 05 |
+| a fazer | Deploy com rollback, e observabilidade | 06 |
 
 Isto é um **esqueleto que anda**: pouco faz, mas atravessa o sistema de ponta a ponta —
 navegador, front-end, rede interna do Docker, API e banco. Cada fatia seguinte é
@@ -199,7 +203,7 @@ enviar material  →  extrair tópicos contra a taxonomia  →  gerar roadmap  �
 
 Em detalhe:
 
-- Cadastro e login do aluno, usando o serviço externo de autenticação.
+- Cadastro do aluno com confirmação por e-mail, e login, construídos pelo próprio time.
 - Cadastro do objetivo: prova, data, horas por semana, matérias difíceis.
 - Upload de material em PDF.
 - Processamento assíncrono do material: extração de texto, indexação e mapeamento
@@ -235,22 +239,33 @@ de flashcards coerentes com aquele PDF — sem ajuda de ninguém do time e sem o
 A ordem das fatias não segue a ordem em que o aluno usa o produto. Ela segue o **risco**:
 o que pode dar errado de forma imprevisível vem primeiro, para sobrar tempo de reagir.
 
-1. **Esqueleto que anda** — feito. Ver [1.1](#11-o-que-já-existe-neste-repositório).
-2. **Duas frentes em paralelo:**
-   - **Cadastro e autenticação.** Trabalho conhecido: o time sabe que dá certo, só não
-     sabe quantas horas leva.
-   - **Prova de conceito do RAG.** Um script solto, sem API, sem tela e sem login, que
-     pega um PDF de verdade e demonstra o caminho inteiro: extração, divisão em trechos,
-     embeddings, recuperação e mapeamento contra a taxonomia. Não precisa ser código de
-     produção — precisa responder se a ideia funciona com material real.
-3. **Integração** das duas frentes no fluxo de upload e processamento.
-4. **Roadmap e flashcards.**
-5. **Créditos, pagamento, CI/CD e observabilidade**, distribuídos ao longo do caminho.
+O trabalho está dividido em **seis milestones**, e cada uma é um estado que dá para
+demonstrar, não uma camada técnica:
 
-O item 2 é o ponto da lista que mais importa. O RAG é a parte com maior incerteza e maior
-peso na avaliação; descobrir em setembro que ele não funciona com a apostila real seria
-fatal, enquanto descobrir que o envio de e-mail dá trabalho, não. Por isso a prova de
-conceito não espera o cadastro ficar pronto.
+| Milestone | O que entrega | Estado |
+| --- | --- | --- |
+| **01. Fundação** | Repositório, contêineres, banco, CI com smoke test, proteção da `main` | concluída |
+| **02. Identidade** | Cadastro, confirmação de e-mail, sessão, login | em andamento |
+| **03. Material vira conhecimento** | Taxonomia, objetivo, upload, fila, ingestão e o **mapa de conhecimento** | em andamento |
+| **04. Entrega ao aluno** | Roadmap semana a semana, e flashcards | a fazer |
+| **05. Cobrança** | Créditos, planos, checkout e webhook | a fazer |
+| **06. Operação** | Deploy com rollback, e observabilidade | a fazer |
+
+**A 03 é o centro do projeto.** Ela junta o que antes eram quatro milestones separadas, e
+juntou por um motivo: nenhuma delas demonstrava nada sozinha. Upload sem processamento não
+serve, processamento sem taxonomia não tem régua, e o mapa precisa das três. Só juntas
+entregam o RAG, que é o requisito de maior peso da avaliação e o de maior incerteza.
+
+Por isso a **prova de conceito do RAG não espera** o resto da 03 ficar pronto. Ela é um
+script solto, sem API, sem tela e sem login, que pega um PDF de verdade e demonstra o
+caminho inteiro: extração, divisão em trechos, embeddings, recuperação e mapeamento contra
+a taxonomia. Não precisa ser código de produção, precisa responder se a ideia funciona com
+material real. Descobrir tarde que não funciona é o único risco capaz de inviabilizar a
+entrega.
+
+**Documentação não é milestone.** É regra: o Pull Request que altera uma rota atualiza o
+`docs/openapi.yaml` no mesmo Pull Request. Como fase no fim, ela só sairia mal ou não
+sairia.
 
 ---
 
@@ -271,7 +286,7 @@ documenta e o componente do sistema que o implementa.
 | 8 | Pesquisa de mercado | [21. Documentação complementar](#21-documentação-complementar) | `docs/pesquisa-de-mercado.md` |
 | 9 | Tudo versionado no GitHub | Este repositório | Código, documentação, diagramas e pipelines no mesmo repositório |
 | 10 | Aplicação roda localmente por containers | [12. Como rodar localmente](#12-como-rodar-localmente) | `compose.yaml` e `Makefile` |
-| 11 | Serviço externo de cadastro e autenticação | [7.2. Papel de cada componente](#72-papel-de-cada-componente) | API externa de autenticação |
+| 11 | Cadastro e autenticação de usuários | [docs/authentication.md](docs/authentication.md) | Módulo `auth`, construído pelo time |
 | 12 | Banco vetorial + banco SQL e/ou NoSQL | [11. Modelo de dados](#11-modelo-de-dados) | PostgreSQL para o relacional e pgvector para o vetorial — ver o risco anotado em [10. Stack](#10-stack) |
 
 ---
@@ -297,7 +312,7 @@ flowchart TB
     end
 
     subgraph externos["Serviços externos"]
-        Auth["API externa de autenticação"]
+        Email["Provedor de e-mail"]
         LLM["Provedor de LLM e embeddings"]
         Pagamento["Provedor de pagamento"]
         Obs["Plataforma de observabilidade"]
@@ -305,8 +320,7 @@ flowchart TB
 
     Aluno --> Web
     Web -->|requisições HTTP| API
-    Web -->|cadastro e login| Auth
-    API -->|valida o token| Auth
+    API -->|envia o código de confirmação| Email
     API -->|grava o PDF| Arquivos
     API -->|grava metadados e créditos| Postgres
     API -->|publica o job| Broker
@@ -345,7 +359,7 @@ escolha está em [10. Stack](#10-stack).
 | **PostgreSQL** | Banco de dados que guarda informação em tabelas com relações entre elas. | Guarda usuário, objetivo, material, créditos, assinatura, roadmap e flashcards — dados que precisam ser consistentes e consultados por relação. |
 | **pgvector** | Extensão do PostgreSQL que ensina o banco a achar textos *parecidos em significado*, e não com a mesma palavra. | É o coração do RAG, e mora no mesmo banco de cima. Ver [9. Como o RAG funciona](#9-como-o-rag-funciona). |
 | **Armazenamento de arquivos** | Onde os PDFs enviados ficam guardados. | Arquivo grande não vai para dentro do banco. A API grava o arquivo aqui e guarda no banco só o endereço dele. |
-| **API externa de autenticação** | Serviço de terceiro que cuida de cadastro, login e emissão de token. | Requisito do trabalho, e boa prática: senha é um problema difícil e arriscado de resolver sozinho. Nossa API só verifica se o token apresentado é válido. |
+| **Provedor de e-mail** | Serviço de terceiro que entrega o e-mail com o código de confirmação. | Entregar e-mail sozinho exige reputação de remetente e infraestrutura própria, e nada disso é o problema deste projeto. |
 | **Provedor de LLM e embeddings** | Serviço de terceiro que roda modelos de linguagem. | Gera os embeddings da indexação e produz o texto do mapa e dos flashcards. |
 | **Provedor de pagamento** | Serviço de terceiro que cobra assinatura e avisa o sistema por webhook. | Requisito do trabalho. Dados de cartão nunca passam pela nossa aplicação. |
 | **Plataforma de observabilidade** | Serviço que recebe erros, métricas e rastros da aplicação. | Sem ele, "o material travou em processando" vira adivinhação. Ver [17. Observabilidade](#17-observabilidade). |
@@ -578,7 +592,7 @@ ao lado.
 | Broker de fila | `<A DEFINIR>` | Suportar retentativa, fila de mensagens mortas e alguma forma de inspecionar o que está na fila. |
 | Armazenamento de arquivos | `<A DEFINIR>` | Rodar local em contêiner e ter cliente estável na linguagem escolhida. |
 | Provedor de LLM e embeddings | `<A DEFINIR>` | Custo por material processado dentro do orçamento do trabalho, limite de contexto suficiente e modelo de embedding com boa qualidade em português. |
-| Autenticação | API externa, `<A DEFINIR>` | Ser externa é exigência do trabalho. Entre as opções, a que entregue cadastro, login e verificação de token com menos código nosso. |
+| Autenticação | **Construída pelo time**, com JWT e refresh token em cookie `HttpOnly` | Decidido. O modelo inteiro, e o porquê de cada escolha, está em [docs/authentication.md](docs/authentication.md). |
 | Meio de pagamento | `<A DEFINIR>` | Ter ambiente de testes gratuito, suportar assinatura recorrente e notificar por webhook. |
 | Observabilidade | `<A DEFINIR>` — Sentry, Datadog ou equivalente | Plano gratuito suficiente para o trabalho, SDK na linguagem escolhida e captura automática de exceção com rastro de pilha. |
 | Destino do deploy no CI/CD | `<A DEFINIR>` | Aceitar imagem de contêiner e permitir voltar para a imagem anterior em um comando. |
@@ -1115,13 +1129,25 @@ O losango de baixo é o guarda: depois de subir a nova versão, o pipeline chama
 sozinho. A seta que entra pela esquerda é a porta manual, para quando o problema aparece
 horas depois, quando o smoke test já passou.
 
-### 16.2. Os três workflows
+### 16.2. O pipeline hoje, e o que falta
 
-| Arquivo | Quando roda | O que faz |
-| --- | --- | --- |
-| `.github/workflows/ci.yml` | Em todo Pull Request e em todo push | Lint, testes, validação do OpenAPI e verificação de segurança. |
-| `.github/workflows/deploy.yml` | No push para a `main`, depois do merge | Build, publicação das imagens, migrações, deploy e smoke test. |
-| `.github/workflows/rollback.yml` | Manualmente, por `workflow_dispatch` | Volta para uma versão anterior informada, ou para o último bom deploy. |
+Tudo vive em `.github/workflows/ci.yml`, com quatro jobs:
+
+| Job | Quando roda | O que faz | Obrigatório |
+| --- | --- | --- | --- |
+| `Backend (API)` | Todo PR e todo push na `main` | Lint, testes unitários e build | sim |
+| `Frontend (Web)` | Todo PR e todo push na `main` | Lint e build | sim |
+| `Smoke` | Depois dos dois acima | Sobe o compose, aplica as migrações, confere que toda entidade tem migração e que `/health` responde | **sim** |
+| `Deploy` | Só no push na `main` | Hoje é um marcador, ainda não publica nada | não roda em PR |
+
+**O smoke test é o que separa "compila" de "funciona".** Lint, teste unitário e build nunca
+ligam a aplicação contra um banco, então deixam passar módulo não registrado, rota que
+estoura e entidade sem migração. Isso já aconteceu duas vezes aqui, com o CI verde nas
+duas. Ele roda igual na sua máquina, com `make smoke`.
+
+O que falta, e é a milestone **06. Operação**: publicar as imagens num registry com a tag
+do commit, aplicar no ambiente, e um workflow manual de rollback que volte para a tag
+anterior.
 
 O destino do deploy é `<A DEFINIR>` — ver critério em [10. Stack](#10-stack). A aplicação
 roda localmente por contêineres, como manda a restrição do trabalho; o ambiente de deploy
@@ -1298,28 +1324,42 @@ yourjourney/
 ├── compose.yaml                    # todos os contêineres do projeto
 ├── .env.example                    # todas as variáveis, com valores de exemplo
 │
+├── .github/workflows/ci.yml        # lint, testes, smoke test e deploy
+│
 ├── apps/
 │   ├── api/                        # API NestJS
 │   │   ├── Dockerfile              # estágios: development (dia a dia) e production
 │   │   ├── src/
-│   │   │   ├── main.ts             # ponto de entrada: porta, CORS
+│   │   │   ├── main.ts             # ponto de entrada: porta, CORS, limites
 │   │   │   ├── app.module.ts       # módulo raiz, onde os outros são registrados
 │   │   │   ├── config/             # o único lugar que lê variável de ambiente
 │   │   │   ├── database/           # conexão e migrações
 │   │   │   │   └── migrations/     # scripts versionados que criam e alteram tabelas
-│   │   │   └── health/             # módulo de exemplo da estrutura MVC
-│   │   │       ├── health.controller.ts
-│   │   │       ├── health.service.ts
-│   │   │       ├── dto/
-│   │   │       └── health.module.ts
+│   │   │   ├── health/             # módulo de exemplo da estrutura MVC
+│   │   │   │   ├── health.controller.ts
+│   │   │   │   ├── health.service.ts
+│   │   │   │   ├── dto/
+│   │   │   │   └── health.module.ts
+│   │   │   ├── auth/               # cadastro, e mais adiante login e sessão
+│   │   │   ├── current-user/       # quem é o aluno da requisição, guarda e decorator
+│   │   │   ├── users/              # entidade e repositório de usuário
+│   │   │   └── study-goals/        # objetivo de estudo
 │   │
 │   └── web/                        # front-end Next.js
 │       ├── Dockerfile
 │       └── src/app/                # App Router: uma pasta por rota
 │
+├── docs/
+│   ├── authentication.md           # como funcionam senha, JWT, refresh e cookies
+│   └── openapi.yaml                # contrato da API
+│
+├── taxonomies/
+│   └── enem.json                   # matriz de referência do ENEM, 154 tópicos
+│
 ├── scripts/
 │   ├── preflight.sh                # confere Docker, compose e .env antes de subir
-│   └── wait-for.sh                 # espera um serviço responder de verdade
+│   ├── wait-for.sh                 # espera um serviço responder de verdade
+│   └── smoke.sh                    # sobe o projeto de verdade e confere que funciona
 │
 └── README.md
 ```
