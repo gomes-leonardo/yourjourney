@@ -1,22 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { randomInt } from 'node:crypto';
 
 /**
- * SERVIÇO DE E-MAIL E CÓDIGO DE CONFIRMAÇÃO
+ * SERVIÇO DE E-MAIL
  *
- * Responsável por gerar códigos de confirmação criptográficos e disparar e-mails.
+ * Responsável por disparar e-mails. A geração do código de confirmação fica
+ * em `EmailConfirmationService`.
  */
 @Injectable()
 export class EmailService {
   private readonly logger = new Logger(EmailService.name);
-
-  /**
-   * Gera um código numérico aleatório de 6 dígitos (100000 - 999999).
-   * Usa `crypto.randomInt` nativo do Node.js para garantir entropia criptográfica real.
-   */
-  generateConfirmationCode(): string {
-    return randomInt(100000, 1000000).toString();
-  }
 
   /**
    * Dispara o e-mail de confirmação de cadastro com o código de 6 dígitos.
@@ -26,13 +18,11 @@ export class EmailService {
    * Se o provedor de e-mail estiver fora do ar ou lento, o cadastro do usuário
    * NÃO é cancelado nem atrasado.
    */
-  async sendConfirmationCode(email: string, codigo: string): Promise<boolean> {
+  async sendConfirmationCode(email: string, _codigo: string): Promise<boolean> {
     try {
-      this.logger.log(
-        `Disparando e-mail de confirmação para ${email} com o código [${codigo}]`,
-      );
+      this.logger.log(`Disparando e-mail de confirmação para ${email}`);
 
-      // Simulação do tempo de envio do provedor SMTP/API externa
+      // Simulação do envio: o código iria no corpo do e-mail, nunca no log
       await new Promise((resolve) => setTimeout(resolve, 50));
 
       return true;
