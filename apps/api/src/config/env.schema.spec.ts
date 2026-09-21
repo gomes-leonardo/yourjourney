@@ -22,6 +22,35 @@ describe('validateEnv', () => {
     expect(env.WEB_BASE_URL).toBe('http://localhost:3000');
   });
 
+  it('usa 10 minutos e 5 tentativas para o código de confirmação quando não vêm', () => {
+    const { DATABASE_URL } = ENV_VALIDO;
+
+    const env = validateEnv({ DATABASE_URL });
+
+    expect(env.CONFIRMATION_CODE_TTL_MINUTES).toBe(10);
+    expect(env.CONFIRMATION_CODE_MAX_ATTEMPTS).toBe(5);
+  });
+
+  it('converte a validade e o limite de tentativas de texto para número', () => {
+    const env = validateEnv({
+      ...ENV_VALIDO,
+      CONFIRMATION_CODE_TTL_MINUTES: '15',
+      CONFIRMATION_CODE_MAX_ATTEMPTS: '3',
+    });
+
+    expect(env.CONFIRMATION_CODE_TTL_MINUTES).toBe(15);
+    expect(env.CONFIRMATION_CODE_MAX_ATTEMPTS).toBe(3);
+  });
+
+  it('recusa validade ou limite de tentativas zerados ou que não são número', () => {
+    expect(() =>
+      validateEnv({ ...ENV_VALIDO, CONFIRMATION_CODE_TTL_MINUTES: '0' }),
+    ).toThrow(/CONFIRMATION_CODE_TTL_MINUTES/);
+    expect(() =>
+      validateEnv({ ...ENV_VALIDO, CONFIRMATION_CODE_MAX_ATTEMPTS: 'cinco' }),
+    ).toThrow(/CONFIRMATION_CODE_MAX_ATTEMPTS/);
+  });
+
   it('recusa subir sem DATABASE_URL, dizendo qual variável falta', () => {
     expect(() => validateEnv({})).toThrow(/DATABASE_URL/);
   });

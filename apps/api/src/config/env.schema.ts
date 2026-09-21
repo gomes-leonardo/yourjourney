@@ -35,6 +35,18 @@ export const envSchema = z.object({
         error: 'precisa começar com postgres:// ou postgresql://',
       },
     ),
+
+  CONFIRMATION_CODE_TTL_MINUTES: z.coerce
+    .number({ error: 'precisa ser um número de minutos, por exemplo 10' })
+    .int()
+    .positive()
+    .default(10),
+
+  CONFIRMATION_CODE_MAX_ATTEMPTS: z.coerce
+    .number({ error: 'precisa ser um número de tentativas, por exemplo 5' })
+    .int()
+    .positive()
+    .default(5),
 });
 
 export type Env = z.infer<typeof envSchema>;
