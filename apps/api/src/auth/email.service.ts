@@ -14,7 +14,7 @@ export class EmailService {
    * Gera um código numérico aleatório de 6 dígitos (100000 - 999999).
    * Usa `crypto.randomInt` nativo do Node.js para garantir entropia criptográfica real.
    */
-  gerarCodigoConfirmacao(): string {
+  generateConfirmationCode(): string {
     return randomInt(100000, 1000000).toString();
   }
 
@@ -26,10 +26,7 @@ export class EmailService {
    * Se o provedor de e-mail estiver fora do ar ou lento, o cadastro do usuário
    * NÃO é cancelado nem atrasado.
    */
-  async enviarCodigoConfirmacao(
-    email: string,
-    codigo: string,
-  ): Promise<boolean> {
+  async sendConfirmationCode(email: string, codigo: string): Promise<boolean> {
     try {
       this.logger.log(
         `Disparando e-mail de confirmação para ${email} com o código [${codigo}]`,

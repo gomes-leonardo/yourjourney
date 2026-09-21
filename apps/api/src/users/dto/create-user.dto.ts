@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 /**
  * DTO DE ENTRADA (Data Transfer Object)
  *
- * Define o contrato dos dados enviados ao cadastrar um usuário.
+ * Define o contrato dos dados enviados ao register um usuário.
  */
 export class CreateUserDto {
   /** Nome completo do usuário. */

@@ -15,6 +15,7 @@
     "start:prod": "node dist/main",
     "lint": "npm run format:check && oxlint src/ test/",
     "test": "vitest run",
+    "test:integration": "vitest run src/database/study-goal-migration.integration.spec.ts",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --no-file-parallelism",

@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service.js';
-import { CadastroDto } from './dto/cadastro.dto.js';
+import { RegisterDto } from './dto/register.dto.js';
 import { UserResponseDto } from '../users/dto/user-response.dto.js';
 
 /**
@@ -48,7 +48,7 @@ export class AuthController {
       errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY, // Responde 422 em falhas de validação de campo
     }),
   )
-  async cadastrar(@Body() dto: CadastroDto): Promise<UserResponseDto> {
-    return this.authService.cadastrar(dto);
+  async register(@Body() dto: RegisterDto): Promise<UserResponseDto> {
+    return this.authService.register(dto);
   }
 }

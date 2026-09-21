@@ -12,7 +12,7 @@ import {
  *
  * Contrato estrito com validações de segurança contra entradas maliciosas.
  */
-export class CadastroDto {
+export class RegisterDto {
   /** Nome completo do aluno. */
   @IsNotEmpty({ message: 'O nome é obrigatório.' })
   @IsString({ message: 'O nome deve ser um texto.' })

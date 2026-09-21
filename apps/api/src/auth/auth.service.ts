@@ -2,7 +2,7 @@ import { Injectable, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UsersRepository } from '../users/users.repository.js';
 import { UserResponseDto } from '../users/dto/user-response.dto.js';
-import { CadastroDto } from './dto/cadastro.dto.js';
+import { RegisterDto } from './dto/register.dto.js';
 import { EmailService } from './email.service.js';
 
 /**
@@ -28,7 +28,7 @@ export class AuthService {
    * 5. Dispara o e-mail de confirmação em background (sem aguardar a resposta HTTP).
    * 6. Devolve `UserResponseDto` (NENHUMA senha ou token JWT é retornado).
    */
-  async cadastrar(dto: CadastroDto): Promise<UserResponseDto> {
+  async register(dto: RegisterDto): Promise<UserResponseDto> {
     const emailNormalizado = dto.email.trim().toLowerCase();
 
     // 1. Verifica duplicidade de e-mail
@@ -53,8 +53,8 @@ export class AuthService {
     });
 
     // 4. Gera o código de confirmação e envia o e-mail de forma assíncrona (não-bloqueante)
-    const codigoConfirmacao = this.emailService.gerarCodigoConfirmacao();
-    void this.emailService.enviarCodigoConfirmacao(
+    const codigoConfirmacao = this.emailService.generateConfirmationCode();
+    void this.emailService.sendConfirmationCode(
       emailNormalizado,
       codigoConfirmacao,
     );

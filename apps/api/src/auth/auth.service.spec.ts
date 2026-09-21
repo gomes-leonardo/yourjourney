@@ -18,8 +18,8 @@ describe('AuthService', () => {
     } as unknown as UsersRepository;
 
     emailServiceMock = {
-      gerarCodigoConfirmacao: vi.fn().mockReturnValue('123456'),
-      enviarCodigoConfirmacao: vi.fn().mockResolvedValue(true),
+      generateConfirmationCode: vi.fn().mockReturnValue('123456'),
+      sendConfirmationCode: vi.fn().mockResolvedValue(true),
     } as unknown as EmailService;
 
     service = new AuthService(usersRepositoryMock, emailServiceMock);
@@ -46,7 +46,7 @@ describe('AuthService', () => {
         } as User;
       });
 
-    const resultado = await service.cadastrar({
+    const resultado = await service.register({
       nome: '  Carlos Eduardo  ',
       email: '  CARLOS.EDUARDO@EMAIL.COM  ',
       senha: 'senhaSegura123',
@@ -74,8 +74,8 @@ describe('AuthService', () => {
     expect(resultado.email_confirmed_at).toBeNull();
 
     // E-mail disparado assincronamente
-    expect(emailServiceMock.gerarCodigoConfirmacao).toHaveBeenCalled();
-    expect(emailServiceMock.enviarCodigoConfirmacao).toHaveBeenCalledWith(
+    expect(emailServiceMock.generateConfirmationCode).toHaveBeenCalled();
+    expect(emailServiceMock.sendConfirmationCode).toHaveBeenCalledWith(
       'carlos.eduardo@email.com',
       '123456',
     );
@@ -88,7 +88,7 @@ describe('AuthService', () => {
     } as User);
 
     await expect(
-      service.cadastrar({
+      service.register({
         nome: 'Novo Aluno',
         email: 'DUPLICADO@EMAIL.COM',
         senha: 'senhaSegura123',
@@ -113,11 +113,11 @@ describe('AuthService', () => {
     });
 
     // Simula provedor de e-mail rejeitando a promise / fora do ar
-    vi.spyOn(emailServiceMock, 'enviarCodigoConfirmacao').mockRejectedValue(
+    vi.spyOn(emailServiceMock, 'sendConfirmationCode').mockRejectedValue(
       new Error('Provedor SMTP fora do ar'),
     );
 
-    const resultado = await service.cadastrar({
+    const resultado = await service.register({
       nome: 'Aluno Resiliente',
       email: 'resiliente@email.com',
       senha: 'senhaSegura123',

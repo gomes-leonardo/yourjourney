@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { validate } from 'class-validator';
-import { CadastroDto } from './cadastro.dto.js';
+import { RegisterDto } from './register.dto.js';
 
-describe('CadastroDto', () => {
+describe('RegisterDto', () => {
   it('deve aprovar DTO válido', async () => {
-    const dto = new CadastroDto();
+    const dto = new RegisterDto();
     dto.nome = 'Aluno Teste';
     dto.email = 'aluno@email.com';
     dto.senha = 'senhaSegura123';
@@ -14,7 +14,7 @@ describe('CadastroDto', () => {
   });
 
   it('deve rejeitar e-mail inválido', async () => {
-    const dto = new CadastroDto();
+    const dto = new RegisterDto();
     dto.nome = 'Aluno Teste';
     dto.email = 'email-invalido';
     dto.senha = 'senhaSegura123';
@@ -25,7 +25,7 @@ describe('CadastroDto', () => {
   });
 
   it('deve rejeitar senha curta (< 8 caracteres)', async () => {
-    const dto = new CadastroDto();
+    const dto = new RegisterDto();
     dto.nome = 'Aluno Teste';
     dto.email = 'aluno@email.com';
     dto.senha = 'senha1'; // 6 caracteres
@@ -36,7 +36,7 @@ describe('CadastroDto', () => {
   });
 
   it('deve rejeitar senha sem número', async () => {
-    const dto = new CadastroDto();
+    const dto = new RegisterDto();
     dto.nome = 'Aluno Teste';
     dto.email = 'aluno@email.com';
     dto.senha = 'senhaApenasTexto';
@@ -47,7 +47,7 @@ describe('CadastroDto', () => {
   });
 
   it('deve rejeitar senha com mais de 72 caracteres (prevenção DoS)', async () => {
-    const dto = new CadastroDto();
+    const dto = new RegisterDto();
     dto.nome = 'Aluno Teste';
     dto.email = 'aluno@email.com';
     dto.senha = 'a1'.repeat(37); // 74 caracteres

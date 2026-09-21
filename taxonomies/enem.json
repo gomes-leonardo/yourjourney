@@ -1,0 +1,931 @@
+{
+  "taxonomia": "enem",
+  "versao": "2026",
+  "fonte": "https://download.inep.gov.br/enem/outros_documentos/enem_matriz_de_referencia_v1.pdf (baixado em 2026-09-18)",
+  "topicos": [
+    {
+      "codigo": "LC",
+      "titulo": "Linguagens, Códigos e suas Tecnologias",
+      "nivel": "area",
+      "pai": null
+    },
+    {
+      "codigo": "LC-C1",
+      "titulo": "Aplicar as tecnologias da comunicação e da informação na escola, no trabalho e em outros contextos relevantes para sua vida.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C1-H1",
+      "titulo": "Identificar as diferentes linguagens e seus recursos expressivos como elementos de caracterização dos sistemas de comunicação.",
+      "nivel": "habilidade",
+      "pai": "LC-C1"
+    },
+    {
+      "codigo": "LC-C1-H2",
+      "titulo": "Recorrer aos conhecimentos sobre as linguagens dos sistemas de comunicação e informação para resolver problemas sociais.",
+      "nivel": "habilidade",
+      "pai": "LC-C1"
+    },
+    {
+      "codigo": "LC-C1-H3",
+      "titulo": "Relacionar informações geradas nos sistemas de comunicação e informação, considerando a função social desses sistemas.",
+      "nivel": "habilidade",
+      "pai": "LC-C1"
+    },
+    {
+      "codigo": "LC-C1-H4",
+      "titulo": "Reconhecer posições críticas aos usos sociais que são feitos das linguagens e dos sistemas de comunicação e informação.",
+      "nivel": "habilidade",
+      "pai": "LC-C1"
+    },
+    {
+      "codigo": "LC-C2",
+      "titulo": "Conhecer e usar língua(s) estrangeira(s) moderna(s) como instrumento de acesso a informações e a outras culturas e grupos sociais.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C2-H5",
+      "titulo": "Associar vocábulos e expressões de um texto em LEM ao seu tema.",
+      "nivel": "habilidade",
+      "pai": "LC-C2"
+    },
+    {
+      "codigo": "LC-C2-H6",
+      "titulo": "Utilizar os conhecimentos da LEM e de seus mecanismos como meio de ampliar as possibilidades de acesso a informações, tecnologias e culturas.",
+      "nivel": "habilidade",
+      "pai": "LC-C2"
+    },
+    {
+      "codigo": "LC-C2-H7",
+      "titulo": "Relacionar um texto em LEM, as estruturas linguísticas, sua função e seu uso social.",
+      "nivel": "habilidade",
+      "pai": "LC-C2"
+    },
+    {
+      "codigo": "LC-C2-H8",
+      "titulo": "Reconhecer a importância da produção cultural em LEM como representação da diversidade cultural e linguística.",
+      "nivel": "habilidade",
+      "pai": "LC-C2"
+    },
+    {
+      "codigo": "LC-C3",
+      "titulo": "Compreender e usar a linguagem corporal como relevante para a própria vida, integradora social e formadora da identidade.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C3-H9",
+      "titulo": "Reconhecer as manifestações corporais de movimento como originárias de necessidades cotidianas de um grupo social.",
+      "nivel": "habilidade",
+      "pai": "LC-C3"
+    },
+    {
+      "codigo": "LC-C3-H10",
+      "titulo": "Reconhecer a necessidade de transformação de hábitos corporais em função das necessidades cinestésicas.",
+      "nivel": "habilidade",
+      "pai": "LC-C3"
+    },
+    {
+      "codigo": "LC-C3-H11",
+      "titulo": "Reconhecer a linguagem corporal como meio de interação social, considerando os limites de desempenho e as alternativas de adaptação para diferentes indivíduos.",
+      "nivel": "habilidade",
+      "pai": "LC-C3"
+    },
+    {
+      "codigo": "LC-C4",
+      "titulo": "Compreender a arte como saber cultural e estético gerador de significação e integrador da organização do mundo e da própria identidade.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C4-H12",
+      "titulo": "Reconhecer diferentes funções da arte, do trabalho da produção dos artistas em seus meios culturais.",
+      "nivel": "habilidade",
+      "pai": "LC-C4"
+    },
+    {
+      "codigo": "LC-C4-H13",
+      "titulo": "Analisar as diversas produções artísticas como meio de explicar diferentes culturas, padrões de beleza e preconceitos.",
+      "nivel": "habilidade",
+      "pai": "LC-C4"
+    },
+    {
+      "codigo": "LC-C4-H14",
+      "titulo": "Reconhecer o valor da diversidade artística e das inter-relações de elementos que se apresentam nas manifestações de vários grupos sociais e étnicos.",
+      "nivel": "habilidade",
+      "pai": "LC-C4"
+    },
+    {
+      "codigo": "LC-C5",
+      "titulo": "Analisar, interpretar e aplicar recursos expressivos das linguagens, relacionando textos com seus contextos, mediante a natureza, função, organização, estrutura das manifestações, de acordo com as condições de produção e recepção.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C5-H15",
+      "titulo": "Estabelecer relações entre o texto literário e o momento de sua produção, situando aspectos do contexto histórico, social e político.",
+      "nivel": "habilidade",
+      "pai": "LC-C5"
+    },
+    {
+      "codigo": "LC-C5-H16",
+      "titulo": "Relacionar informações sobre concepções artísticas e procedimentos de construção do texto literário.",
+      "nivel": "habilidade",
+      "pai": "LC-C5"
+    },
+    {
+      "codigo": "LC-C5-H17",
+      "titulo": "Reconhecer a presença de valores sociais e humanos atualizáveis e permanentes no patrimônio literário nacional.",
+      "nivel": "habilidade",
+      "pai": "LC-C5"
+    },
+    {
+      "codigo": "LC-C6",
+      "titulo": "Compreender e usar os sistemas simbólicos das diferentes linguagens como meios de organização cognitiva da realidade pela constituição de significados, expressão, comunicação e informação.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C6-H18",
+      "titulo": "Identificar os elementos que concorrem para a progressão temática e para a organização e estruturação de textos de diferentes gêneros e tipos.",
+      "nivel": "habilidade",
+      "pai": "LC-C6"
+    },
+    {
+      "codigo": "LC-C6-H19",
+      "titulo": "Analisar a função da linguagem predominante nos textos em situações específicas de interlocução.",
+      "nivel": "habilidade",
+      "pai": "LC-C6"
+    },
+    {
+      "codigo": "LC-C6-H20",
+      "titulo": "Reconhecer a importância do patrimônio linguístico para a preservação da memória e da identidade nacional.",
+      "nivel": "habilidade",
+      "pai": "LC-C6"
+    },
+    {
+      "codigo": "LC-C7",
+      "titulo": "Confrontar opiniões e pontos de vista sobre as diferentes linguagens e suas manifestações específicas.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C7-H21",
+      "titulo": "Reconhecer, em textos de diferentes gêneros, recursos verbais e não verbais utilizados com a finalidade de criar e mudar comportamentos e hábitos.",
+      "nivel": "habilidade",
+      "pai": "LC-C7"
+    },
+    {
+      "codigo": "LC-C7-H22",
+      "titulo": "Relacionar, em diferentes textos, opiniões, temas, assuntos e recursos linguísticos.",
+      "nivel": "habilidade",
+      "pai": "LC-C7"
+    },
+    {
+      "codigo": "LC-C7-H23",
+      "titulo": "Inferir em um texto quais são os objetivos de seu produtor e quem é seu público-alvo, pela análise dos procedimentos argumentativos utilizados.",
+      "nivel": "habilidade",
+      "pai": "LC-C7"
+    },
+    {
+      "codigo": "LC-C7-H24",
+      "titulo": "Reconhecer no texto estratégias argumentativas empregadas para o convencimento do público, tais como a intimidação, sedução, comoção, chantagem, entre outras.",
+      "nivel": "habilidade",
+      "pai": "LC-C7"
+    },
+    {
+      "codigo": "LC-C8",
+      "titulo": "Compreender e usar a língua portuguesa como língua materna, geradora de significação e integradora da organização do mundo e da própria identidade.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C8-H25",
+      "titulo": "Identificar, em textos de diferentes gêneros, as marcas linguísticas que singularizam as variedades linguísticas sociais, regionais e de registro.",
+      "nivel": "habilidade",
+      "pai": "LC-C8"
+    },
+    {
+      "codigo": "LC-C8-H26",
+      "titulo": "Relacionar as variedades linguísticas a situações específicas de uso social.",
+      "nivel": "habilidade",
+      "pai": "LC-C8"
+    },
+    {
+      "codigo": "LC-C8-H27",
+      "titulo": "Reconhecer os usos da norma-padrão da língua portuguesa nas diferentes situações de comunicação.",
+      "nivel": "habilidade",
+      "pai": "LC-C8"
+    },
+    {
+      "codigo": "LC-C9",
+      "titulo": "Entender os princípios, a natureza, a função e o impacto das tecnologias da comunicação e da informação na sua vida pessoal e social, no desenvolvimento do conhecimento, associando-os aos conhecimentos científicos, às linguagens que lhes dão suporte, às demais tecnologias, aos processos de produção e aos problemas que se propõem solucionar.",
+      "nivel": "competencia",
+      "pai": "LC"
+    },
+    {
+      "codigo": "LC-C9-H28",
+      "titulo": "Reconhecer a função e o impacto social das diferentes tecnologias da comunicação e informação.",
+      "nivel": "habilidade",
+      "pai": "LC-C9"
+    },
+    {
+      "codigo": "LC-C9-H29",
+      "titulo": "Identificar, pela análise de suas linguagens, as tecnologias da comunicação e informação.",
+      "nivel": "habilidade",
+      "pai": "LC-C9"
+    },
+    {
+      "codigo": "LC-C9-H30",
+      "titulo": "Relacionar as tecnologias de comunicação e informação ao desenvolvimento das sociedades e ao conhecimento que elas produzem.",
+      "nivel": "habilidade",
+      "pai": "LC-C9"
+    },
+    {
+      "codigo": "MT",
+      "titulo": "Matemática e suas Tecnologias",
+      "nivel": "area",
+      "pai": null
+    },
+    {
+      "codigo": "MT-C1",
+      "titulo": "Construir significados para os números naturais, inteiros, racionais e reais.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C1-H1",
+      "titulo": "Reconhecer, no contexto social, diferentes significados e representações dos números e operações — naturais, inteiros, racionais ou reais.",
+      "nivel": "habilidade",
+      "pai": "MT-C1"
+    },
+    {
+      "codigo": "MT-C1-H2",
+      "titulo": "Identificar padrões numéricos ou princípios de contagem.",
+      "nivel": "habilidade",
+      "pai": "MT-C1"
+    },
+    {
+      "codigo": "MT-C1-H3",
+      "titulo": "Resolver situação-problema envolvendo conhecimentos numéricos.",
+      "nivel": "habilidade",
+      "pai": "MT-C1"
+    },
+    {
+      "codigo": "MT-C1-H4",
+      "titulo": "Avaliar a razoabilidade de um resultado numérico na construção de argumentos sobre afirmações quantitativas.",
+      "nivel": "habilidade",
+      "pai": "MT-C1"
+    },
+    {
+      "codigo": "MT-C1-H5",
+      "titulo": "Avaliar propostas de intervenção na realidade utilizando conhecimentos numéricos.",
+      "nivel": "habilidade",
+      "pai": "MT-C1"
+    },
+    {
+      "codigo": "MT-C2",
+      "titulo": "Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C2-H6",
+      "titulo": "Interpretar a localização e a movimentação de pessoas/objetos no espaço tridimensional e sua representação no espaço bidimensional.",
+      "nivel": "habilidade",
+      "pai": "MT-C2"
+    },
+    {
+      "codigo": "MT-C2-H7",
+      "titulo": "Identificar características de figuras planas ou espaciais.",
+      "nivel": "habilidade",
+      "pai": "MT-C2"
+    },
+    {
+      "codigo": "MT-C2-H8",
+      "titulo": "Resolver situação-problema que envolva conhecimentos geométricos de espaço e forma.",
+      "nivel": "habilidade",
+      "pai": "MT-C2"
+    },
+    {
+      "codigo": "MT-C2-H9",
+      "titulo": "Utilizar conhecimentos geométricos de espaço e forma na seleção de argumentos propostos como solução de problemas do cotidiano.",
+      "nivel": "habilidade",
+      "pai": "MT-C2"
+    },
+    {
+      "codigo": "MT-C3",
+      "titulo": "Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C3-H10",
+      "titulo": "Identificar relações entre grandezas e unidades de medida.",
+      "nivel": "habilidade",
+      "pai": "MT-C3"
+    },
+    {
+      "codigo": "MT-C3-H11",
+      "titulo": "Utilizar a noção de escalas na leitura de representação de situação do cotidiano.",
+      "nivel": "habilidade",
+      "pai": "MT-C3"
+    },
+    {
+      "codigo": "MT-C3-H12",
+      "titulo": "Resolver situação-problema que envolva medidas de grandezas.",
+      "nivel": "habilidade",
+      "pai": "MT-C3"
+    },
+    {
+      "codigo": "MT-C3-H13",
+      "titulo": "Avaliar o resultado de uma medição na construção de um argumento consistente.",
+      "nivel": "habilidade",
+      "pai": "MT-C3"
+    },
+    {
+      "codigo": "MT-C3-H14",
+      "titulo": "Avaliar proposta de intervenção na realidade utilizando conhecimentos geométricos relacionados a grandezas e medidas.",
+      "nivel": "habilidade",
+      "pai": "MT-C3"
+    },
+    {
+      "codigo": "MT-C4",
+      "titulo": "Construir noções de variação de grandezas para a compreensão da realidade e a solução de problemas do cotidiano.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C4-H15",
+      "titulo": "Identificar a relação de dependência entre grandezas.",
+      "nivel": "habilidade",
+      "pai": "MT-C4"
+    },
+    {
+      "codigo": "MT-C4-H16",
+      "titulo": "Resolver situação-problema envolvendo a variação de grandezas, direta ou inversamente proporcionais.",
+      "nivel": "habilidade",
+      "pai": "MT-C4"
+    },
+    {
+      "codigo": "MT-C4-H17",
+      "titulo": "Analisar informações envolvendo a variação de grandezas como recurso para a construção de argumentação.",
+      "nivel": "habilidade",
+      "pai": "MT-C4"
+    },
+    {
+      "codigo": "MT-C4-H18",
+      "titulo": "Avaliar propostas de intervenção na realidade envolvendo variação de grandezas.",
+      "nivel": "habilidade",
+      "pai": "MT-C4"
+    },
+    {
+      "codigo": "MT-C5",
+      "titulo": "Modelar e resolver problemas que envolvem variáveis socioeconômicas ou técnico-científicas, usando representações algébricas.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C5-H19",
+      "titulo": "Identificar representações algébricas que expressem a relação entre grandezas.",
+      "nivel": "habilidade",
+      "pai": "MT-C5"
+    },
+    {
+      "codigo": "MT-C5-H20",
+      "titulo": "Interpretar gráfico cartesiano que represente relações entre grandezas.",
+      "nivel": "habilidade",
+      "pai": "MT-C5"
+    },
+    {
+      "codigo": "MT-C5-H21",
+      "titulo": "Resolver situação-problema cuja modelagem envolva conhecimentos algébricos.",
+      "nivel": "habilidade",
+      "pai": "MT-C5"
+    },
+    {
+      "codigo": "MT-C5-H22",
+      "titulo": "Utilizar conhecimentos algébricos/geométricos como recurso para a construção de argumentação.",
+      "nivel": "habilidade",
+      "pai": "MT-C5"
+    },
+    {
+      "codigo": "MT-C5-H23",
+      "titulo": "Avaliar propostas de intervenção na realidade utilizando conhecimentos algébricos.",
+      "nivel": "habilidade",
+      "pai": "MT-C5"
+    },
+    {
+      "codigo": "MT-C6",
+      "titulo": "Interpretar informações de natureza científica e social obtidas da leitura de gráficos e tabelas, realizando previsão de tendência, extrapolação, interpolação e interpretação.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C6-H24",
+      "titulo": "Utilizar informações expressas em gráficos ou tabelas para fazer inferências.",
+      "nivel": "habilidade",
+      "pai": "MT-C6"
+    },
+    {
+      "codigo": "MT-C6-H25",
+      "titulo": "Resolver problema com dados apresentados em tabelas ou gráficos.",
+      "nivel": "habilidade",
+      "pai": "MT-C6"
+    },
+    {
+      "codigo": "MT-C6-H26",
+      "titulo": "Analisar informações expressas em gráficos ou tabelas como recurso para a construção de argumentos.",
+      "nivel": "habilidade",
+      "pai": "MT-C6"
+    },
+    {
+      "codigo": "MT-C7",
+      "titulo": "Compreender o caráter aleatório e não determinístico dos fenômenos naturais e sociais, e utilizar instrumentos adequados para medidas, determinação de amostras e cálculos de probabilidade para interpretar informações de variáveis apresentadas em uma distribuição estatística.",
+      "nivel": "competencia",
+      "pai": "MT"
+    },
+    {
+      "codigo": "MT-C7-H27",
+      "titulo": "Calcular medidas de tendência central ou de dispersão de um conjunto de dados expressos em uma tabela de frequências de dados agrupados (não em classes) ou em gráficos.",
+      "nivel": "habilidade",
+      "pai": "MT-C7"
+    },
+    {
+      "codigo": "MT-C7-H28",
+      "titulo": "Resolver situação-problema que envolva conhecimentos de estatística e probabilidade.",
+      "nivel": "habilidade",
+      "pai": "MT-C7"
+    },
+    {
+      "codigo": "MT-C7-H29",
+      "titulo": "Utilizar conhecimentos de estatística e probabilidade como recurso para a construção de argumentação.",
+      "nivel": "habilidade",
+      "pai": "MT-C7"
+    },
+    {
+      "codigo": "MT-C7-H30",
+      "titulo": "Avaliar propostas de intervenção na realidade utilizando conhecimentos de estatística e probabilidade.",
+      "nivel": "habilidade",
+      "pai": "MT-C7"
+    },
+    {
+      "codigo": "CN",
+      "titulo": "Ciências da Natureza e suas Tecnologias",
+      "nivel": "area",
+      "pai": null
+    },
+    {
+      "codigo": "CN-C1",
+      "titulo": "Compreender as ciências naturais e as tecnologias a elas associadas como construções humanas, percebendo seus papéis nos processos de produção e no desenvolvimento econômico e social da humanidade.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C1-H1",
+      "titulo": "Reconhecer características ou propriedades de fenômenos ondulatórios ou oscilatórios, relacionando-os a seus usos em diferentes contextos.",
+      "nivel": "habilidade",
+      "pai": "CN-C1"
+    },
+    {
+      "codigo": "CN-C1-H2",
+      "titulo": "Associar a solução de problemas de comunicação, transporte, saúde ou outro, com o correspondente desenvolvimento científico e tecnológico.",
+      "nivel": "habilidade",
+      "pai": "CN-C1"
+    },
+    {
+      "codigo": "CN-C1-H3",
+      "titulo": "Confrontar interpretações científicas com interpretações baseadas no senso comum, ao longo do tempo ou em diferentes culturas.",
+      "nivel": "habilidade",
+      "pai": "CN-C1"
+    },
+    {
+      "codigo": "CN-C1-H4",
+      "titulo": "Avaliar propostas de intervenção no ambiente, considerando a qualidade da vida humana ou as medidas de conservação, recuperação ou utilização sustentável da biodiversidade.",
+      "nivel": "habilidade",
+      "pai": "CN-C1"
+    },
+    {
+      "codigo": "CN-C2",
+      "titulo": "Identificar a presença e aplicar as tecnologias associadas às ciências naturais em diferentes contextos.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C2-H5",
+      "titulo": "Dimensionar circuitos ou dispositivos elétricos de uso cotidiano.",
+      "nivel": "habilidade",
+      "pai": "CN-C2"
+    },
+    {
+      "codigo": "CN-C2-H6",
+      "titulo": "Relacionar informações para compreender manuais de instalação ou utilização de aparelhos ou sistemas tecnológicos de uso comum.",
+      "nivel": "habilidade",
+      "pai": "CN-C2"
+    },
+    {
+      "codigo": "CN-C2-H7",
+      "titulo": "Selecionar testes de controle, parâmetros ou critérios para a comparação de materiais e produtos, tendo em vista a defesa do consumidor, a saúde do trabalhador ou a qualidade de vida.",
+      "nivel": "habilidade",
+      "pai": "CN-C2"
+    },
+    {
+      "codigo": "CN-C3",
+      "titulo": "Associar intervenções que resultam em degradação ou conservação ambiental a processos produtivos e sociais e a instrumentos ou ações científico-tecnológicos.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C3-H8",
+      "titulo": "Identificar etapas em processos de obtenção, transformação, utilização ou reciclagem de recursos naturais, energéticos ou matérias-primas, considerando processos biológicos, químicos ou físicos neles envolvidos.",
+      "nivel": "habilidade",
+      "pai": "CN-C3"
+    },
+    {
+      "codigo": "CN-C3-H9",
+      "titulo": "Compreender a importância dos ciclos biogeoquímicos ou do fluxo de energia para a vida ou da ação de agentes ou fenômenos que possam causar alterações nesses processos.",
+      "nivel": "habilidade",
+      "pai": "CN-C3"
+    },
+    {
+      "codigo": "CN-C3-H10",
+      "titulo": "Analisar perturbações ambientais, identificando fontes, transporte e(ou) destino dos poluentes ou prevendo efeitos em sistemas naturais, produtivos ou sociais.",
+      "nivel": "habilidade",
+      "pai": "CN-C3"
+    },
+    {
+      "codigo": "CN-C3-H11",
+      "titulo": "Reconhecer benefícios, limitações e aspectos éticos da biotecnologia, considerando estruturas e processos biológicos envolvidos em produtos biotecnológicos.",
+      "nivel": "habilidade",
+      "pai": "CN-C3"
+    },
+    {
+      "codigo": "CN-C3-H12",
+      "titulo": "Avaliar impactos em ambientes naturais decorrentes de atividades sociais ou econômicas, considerando interesses contraditórios.",
+      "nivel": "habilidade",
+      "pai": "CN-C3"
+    },
+    {
+      "codigo": "CN-C4",
+      "titulo": "Compreender interações entre organismos e ambiente, em particular aquelas relacionadas à saúde humana, relacionando conhecimentos científicos, aspectos culturais e características individuais.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C4-H13",
+      "titulo": "Reconhecer mecanismos de transmissão da vida, prevendo ou explicando a manifestação de características dos seres vivos.",
+      "nivel": "habilidade",
+      "pai": "CN-C4"
+    },
+    {
+      "codigo": "CN-C4-H14",
+      "titulo": "Identificar padrões em fenômenos e processos vitais dos organismos, como manutenção do equilíbrio interno, defesa, relações com o ambiente, sexualidade, entre outros.",
+      "nivel": "habilidade",
+      "pai": "CN-C4"
+    },
+    {
+      "codigo": "CN-C4-H15",
+      "titulo": "Interpretar modelos e experimentos para explicar fenômenos ou processos biológicos em qualquer nível de organização dos sistemas biológicos.",
+      "nivel": "habilidade",
+      "pai": "CN-C4"
+    },
+    {
+      "codigo": "CN-C4-H16",
+      "titulo": "Compreender o papel da evolução na produção de padrões, processos biológicos ou na organização taxonômica dos seres vivos.",
+      "nivel": "habilidade",
+      "pai": "CN-C4"
+    },
+    {
+      "codigo": "CN-C5",
+      "titulo": "Entender métodos e procedimentos próprios das ciências naturais e aplicá-los em diferentes contextos.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C5-H17",
+      "titulo": "Relacionar informações apresentadas em diferentes formas de linguagem e representação usadas nas ciências físicas, químicas ou biológicas, como texto discursivo, gráficos, tabelas, relações matemáticas ou linguagem simbólica.",
+      "nivel": "habilidade",
+      "pai": "CN-C5"
+    },
+    {
+      "codigo": "CN-C5-H18",
+      "titulo": "Relacionar propriedades físicas, químicas ou biológicas de produtos, sistemas ou procedimentos tecnológicos às finalidades a que se destinam.",
+      "nivel": "habilidade",
+      "pai": "CN-C5"
+    },
+    {
+      "codigo": "CN-C5-H19",
+      "titulo": "Avaliar métodos, processos ou procedimentos das ciências naturais que contribuam para diagnosticar ou solucionar problemas de ordem social, econômica ou ambiental.",
+      "nivel": "habilidade",
+      "pai": "CN-C5"
+    },
+    {
+      "codigo": "CN-C6",
+      "titulo": "Apropriar-se de conhecimentos da física para, em situações-problema, interpretar, avaliar ou planejar intervenções científico-tecnológicas.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C6-H20",
+      "titulo": "Caracterizar causas ou efeitos dos movimentos de partículas, substâncias, objetos ou corpos celestes.",
+      "nivel": "habilidade",
+      "pai": "CN-C6"
+    },
+    {
+      "codigo": "CN-C6-H21",
+      "titulo": "Utilizar leis físicas e(ou) químicas para interpretar processos naturais ou tecnológicos inseridos no contexto da termodinâmica e(ou) do eletromagnetismo.",
+      "nivel": "habilidade",
+      "pai": "CN-C6"
+    },
+    {
+      "codigo": "CN-C6-H22",
+      "titulo": "Compreender fenômenos decorrentes da interação entre a radiação e a matéria em suas manifestações em processos naturais ou tecnológicos, ou em suas implicações biológicas, sociais, econômicas ou ambientais.",
+      "nivel": "habilidade",
+      "pai": "CN-C6"
+    },
+    {
+      "codigo": "CN-C6-H23",
+      "titulo": "Avaliar possibilidades de geração, uso ou transformação de energia em ambientes específicos, considerando implicações éticas, ambientais, sociais e(ou) econômicas.",
+      "nivel": "habilidade",
+      "pai": "CN-C6"
+    },
+    {
+      "codigo": "CN-C7",
+      "titulo": "Apropriar-se de conhecimentos da química para, em situações-problema, interpretar, avaliar ou planejar intervenções científico-tecnológicas.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C7-H24",
+      "titulo": "Utilizar códigos e nomenclatura da química para caracterizar materiais, substâncias ou transformações químicas.",
+      "nivel": "habilidade",
+      "pai": "CN-C7"
+    },
+    {
+      "codigo": "CN-C7-H25",
+      "titulo": "Caracterizar materiais ou substâncias, identificando etapas, rendimentos ou implicações biológicas, sociais, econômicas ou ambientais de sua obtenção ou produção.",
+      "nivel": "habilidade",
+      "pai": "CN-C7"
+    },
+    {
+      "codigo": "CN-C7-H26",
+      "titulo": "Avaliar implicações sociais, ambientais e(ou) econômicas na produção ou no consumo de recursos energéticos ou minerais, identificando transformações químicas ou de energia envolvidas nesses processos.",
+      "nivel": "habilidade",
+      "pai": "CN-C7"
+    },
+    {
+      "codigo": "CN-C7-H27",
+      "titulo": "Avaliar propostas de intervenção no meio ambiente aplicando conhecimentos químicos, observando riscos ou benefícios.",
+      "nivel": "habilidade",
+      "pai": "CN-C7"
+    },
+    {
+      "codigo": "CN-C8",
+      "titulo": "Apropriar-se de conhecimentos da biologia para, em situações-problema, interpretar, avaliar ou planejar intervenções científico-tecnológicas.",
+      "nivel": "competencia",
+      "pai": "CN"
+    },
+    {
+      "codigo": "CN-C8-H28",
+      "titulo": "Associar características adaptativas dos organismos com seu modo de vida ou com seus limites de distribuição em diferentes ambientes, em especial em ambientes brasileiros.",
+      "nivel": "habilidade",
+      "pai": "CN-C8"
+    },
+    {
+      "codigo": "CN-C8-H29",
+      "titulo": "Interpretar experimentos ou técnicas que utilizam seres vivos, analisando implicações para o ambiente, a saúde, a produção de alimentos, as matérias-primas ou os produtos industriais.",
+      "nivel": "habilidade",
+      "pai": "CN-C8"
+    },
+    {
+      "codigo": "CN-C8-H30",
+      "titulo": "Avaliar propostas de alcance individual ou coletivo, identificando aquelas que visam à preservação e à implementação da saúde individual, coletiva ou do ambiente.",
+      "nivel": "habilidade",
+      "pai": "CN-C8"
+    },
+    {
+      "codigo": "CH",
+      "titulo": "Ciências Humanas e suas Tecnologias",
+      "nivel": "area",
+      "pai": null
+    },
+    {
+      "codigo": "CH-C1",
+      "titulo": "Compreender os elementos culturais que constituem as identidades.",
+      "nivel": "competencia",
+      "pai": "CH"
+    },
+    {
+      "codigo": "CH-C1-H1",
+      "titulo": "Interpretar historicamente e(ou) geograficamente fontes documentais acerca de aspectos da cultura.",
+      "nivel": "habilidade",
+      "pai": "CH-C1"
+    },
+    {
+      "codigo": "CH-C1-H2",
+      "titulo": "Analisar a produção da memória pelas sociedades humanas.",
+      "nivel": "habilidade",
+      "pai": "CH-C1"
+    },
+    {
+      "codigo": "CH-C1-H3",
+      "titulo": "Associar as manifestações culturais do presente aos seus processos históricos.",
+      "nivel": "habilidade",
+      "pai": "CH-C1"
+    },
+    {
+      "codigo": "CH-C1-H4",
+      "titulo": "Comparar pontos de vista expressos em diferentes fontes sobre determinado aspecto da cultura.",
+      "nivel": "habilidade",
+      "pai": "CH-C1"
+    },
+    {
+      "codigo": "CH-C1-H5",
+      "titulo": "Identificar as manifestações ou representações da diversidade do patrimônio cultural e artístico em diferentes sociedades.",
+      "nivel": "habilidade",
+      "pai": "CH-C1"
+    },
+    {
+      "codigo": "CH-C2",
+      "titulo": "Compreender as transformações dos espaços geográficos como produto das relações socioeconômicas e culturais de poder.",
+      "nivel": "competencia",
+      "pai": "CH"
+    },
+    {
+      "codigo": "CH-C2-H6",
+      "titulo": "Interpretar diferentes representações gráficas e cartográficas dos espaços geográficos.",
+      "nivel": "habilidade",
+      "pai": "CH-C2"
+    },
+    {
+      "codigo": "CH-C2-H7",
+      "titulo": "Identificar os significados histórico-geográficos das relações de poder entre as nações.",
+      "nivel": "habilidade",
+      "pai": "CH-C2"
+    },
+    {
+      "codigo": "CH-C2-H8",
+      "titulo": "Analisar a ação dos Estados nacionais no que se refere à dinâmica dos fluxos populacionais e no enfrentamento de problemas de ordem econômico-social.",
+      "nivel": "habilidade",
+      "pai": "CH-C2"
+    },
+    {
+      "codigo": "CH-C2-H9",
+      "titulo": "Comparar o significado histórico-geográfico das organizações políticas e socioeconômicas em escala local, regional ou mundial.",
+      "nivel": "habilidade",
+      "pai": "CH-C2"
+    },
+    {
+      "codigo": "CH-C2-H10",
+      "titulo": "Reconhecer a dinâmica da organização dos movimentos sociais e a importância da participação da coletividade na transformação da realidade histórico-geográfica.",
+      "nivel": "habilidade",
+      "pai": "CH-C2"
+    },
+    {
+      "codigo": "CH-C3",
+      "titulo": "Compreender a produção e o papel histórico das instituições sociais, políticas e econômicas, associando-as aos diferentes grupos, conflitos e movimentos sociais.",
+      "nivel": "competencia",
+      "pai": "CH"
+    },
+    {
+      "codigo": "CH-C3-H11",
+      "titulo": "Identificar registros de práticas de grupos sociais no tempo e no espaço.",
+      "nivel": "habilidade",
+      "pai": "CH-C3"
+    },
+    {
+      "codigo": "CH-C3-H12",
+      "titulo": "Analisar o papel da justiça como instituição na organização das sociedades.",
+      "nivel": "habilidade",
+      "pai": "CH-C3"
+    },
+    {
+      "codigo": "CH-C3-H13",
+      "titulo": "Analisar a atuação dos movimentos sociais que contribuíram para mudanças ou rupturas em processos de disputa pelo poder.",
+      "nivel": "habilidade",
+      "pai": "CH-C3"
+    },
+    {
+      "codigo": "CH-C3-H14",
+      "titulo": "Comparar diferentes pontos de vista, presentes em textos analíticos e interpretativos, sobre situação ou fatos de natureza histórico-geográfica acerca das instituições sociais, políticas e econômicas.",
+      "nivel": "habilidade",
+      "pai": "CH-C3"
+    },
+    {
+      "codigo": "CH-C3-H15",
+      "titulo": "Avaliar criticamente conflitos culturais, sociais, políticos, econômicos ou ambientais ao longo da história.",
+      "nivel": "habilidade",
+      "pai": "CH-C3"
+    },
+    {
+      "codigo": "CH-C4",
+      "titulo": "Entender as transformações técnicas e tecnológicas e seu impacto nos processos de produção, no desenvolvimento do conhecimento e na vida social.",
+      "nivel": "competencia",
+      "pai": "CH"
+    },
+    {
+      "codigo": "CH-C4-H16",
+      "titulo": "Identificar registros sobre o papel das técnicas e tecnologias na organização do trabalho e(ou) da vida social.",
+      "nivel": "habilidade",
+      "pai": "CH-C4"
+    },
+    {
+      "codigo": "CH-C4-H17",
+      "titulo": "Analisar fatores que explicam o impacto das novas tecnologias no processo de territorialização da produção.",
+      "nivel": "habilidade",
+      "pai": "CH-C4"
+    },
+    {
+      "codigo": "CH-C4-H18",
+      "titulo": "Analisar diferentes processos de produção ou circulação de riquezas e suas implicações sócio-espaciais.",
+      "nivel": "habilidade",
+      "pai": "CH-C4"
+    },
+    {
+      "codigo": "CH-C4-H19",
+      "titulo": "Reconhecer as transformações técnicas e tecnológicas que determinam as várias formas de uso e apropriação dos espaços rural e urbano.",
+      "nivel": "habilidade",
+      "pai": "CH-C4"
+    },
+    {
+      "codigo": "CH-C4-H20",
+      "titulo": "Selecionar argumentos favoráveis ou contrários às modificações impostas pelas novas tecnologias à vida social e ao mundo do trabalho.",
+      "nivel": "habilidade",
+      "pai": "CH-C4"
+    },
+    {
+      "codigo": "CH-C5",
+      "titulo": "Utilizar os conhecimentos históricos para compreender e valorizar os fundamentos da cidadania e da democracia, favorecendo uma atuação consciente do indivíduo na sociedade.",
+      "nivel": "competencia",
+      "pai": "CH"
+    },
+    {
+      "codigo": "CH-C5-H21",
+      "titulo": "Identificar o papel dos meios de comunicação na construção da vida social.",
+      "nivel": "habilidade",
+      "pai": "CH-C5"
+    },
+    {
+      "codigo": "CH-C5-H22",
+      "titulo": "Analisar as lutas sociais e conquistas obtidas no que se refere às mudanças nas legislações ou nas políticas públicas.",
+      "nivel": "habilidade",
+      "pai": "CH-C5"
+    },
+    {
+      "codigo": "CH-C5-H23",
+      "titulo": "Analisar a importância dos valores éticos na estruturação política das sociedades.",
+      "nivel": "habilidade",
+      "pai": "CH-C5"
+    },
+    {
+      "codigo": "CH-C5-H24",
+      "titulo": "Relacionar cidadania e democracia na organização das sociedades.",
+      "nivel": "habilidade",
+      "pai": "CH-C5"
+    },
+    {
+      "codigo": "CH-C5-H25",
+      "titulo": "Identificar estratégias que promovam formas de inclusão social.",
+      "nivel": "habilidade",
+      "pai": "CH-C5"
+    },
+    {
+      "codigo": "CH-C6",
+      "titulo": "Compreender a sociedade e a natureza, reconhecendo suas interações no espaço em diferentes contextos históricos e geográficos.",
+      "nivel": "competencia",
+      "pai": "CH"
+    },
+    {
+      "codigo": "CH-C6-H26",
+      "titulo": "Identificar em fontes diversas o processo de ocupação dos meios físicos e as relações da vida humana com a paisagem.",
+      "nivel": "habilidade",
+      "pai": "CH-C6"
+    },
+    {
+      "codigo": "CH-C6-H27",
+      "titulo": "Analisar de maneira crítica as interações da sociedade com o meio físico, levando em consideração aspectos históricos e(ou) geográficos.",
+      "nivel": "habilidade",
+      "pai": "CH-C6"
+    },
+    {
+      "codigo": "CH-C6-H28",
+      "titulo": "Relacionar o uso das tecnologias com os impactos sócio-ambientais em diferentes contextos histórico-geográficos.",
+      "nivel": "habilidade",
+      "pai": "CH-C6"
+    },
+    {
+      "codigo": "CH-C6-H29",
+      "titulo": "Reconhecer a função dos recursos naturais na produção do espaço geográfico, relacionando-os com as mudanças provocadas pelas ações humanas.",
+      "nivel": "habilidade",
+      "pai": "CH-C6"
+    },
+    {
+      "codigo": "CH-C6-H30",
+      "titulo": "Avaliar as relações entre preservação e degradação da vida no planeta nas diferentes escalas.",
+      "nivel": "habilidade",
+      "pai": "CH-C6"
+    }
+  ]
+}
