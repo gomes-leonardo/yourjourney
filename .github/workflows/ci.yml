@@ -16,7 +16,7 @@ jobs:
   build_and_test_api:
     name: Backend (API) - Lint, Test & Build
     runs-on: ubuntu-latest
-
+    
     # Define a pasta apps/api como diretório padrão para todos os comandos 'run' deste job
     defaults:
       run:
@@ -35,7 +35,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: apps/api/package-lock.json
 
-      # Instala as dependências exatas son (modo limpo e reprodutível)
+      # Instala as dependências exatas a partir do package-lock.json (modo limpo e reprodutível)
       - name: Install dependencies
         run: npm ci
 
@@ -47,18 +47,18 @@ jobs:
       - name: Run tests
         run: npm test
 
-      # Valida se a compilação do NestJerros
+      # Valida se a compilação do NestJS / TypeScript ocorre sem erros
       - name: Build API
         run: npm run build
 
-  # ==================================================
+  # ============================================================================
   # 2. Validação do Frontend (Web Next.js)
   # ============================================================================
   build_and_test_frontend:
     name: Frontend (Web) - Lint & Build
     runs-on: ubuntu-latest
-
-    # Define a pasta apps/web como dire comandos 'run' deste job
+    
+    # Define a pasta apps/web como diretório padrão para todos os comandos 'run' deste job
     defaults:
       run:
         working-directory: apps/web
@@ -74,7 +74,7 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
-          cache-dependency-path: apps/w
+          cache-dependency-path: apps/web/package-lock.json
 
       # Instala dependências do Next.js
       - name: Install dependencies
@@ -89,27 +89,27 @@ jobs:
         run: npm run build
 
   # ============================================================================
-  # 3. Smoke test (sobe o projeto de ve responde)
+  # 3. Smoke test (sobe o projeto de verdade, migra e confere que responde)
   # ============================================================================
   smoke:
     name: Smoke - sobe, migra e responde
     runs-on: ubuntu-latest
-    # Só roda depois que lint, teste e build passaram. Não adianta subir o
-    # projeto se o código nem compila.
+    # So roda depois que lint, teste e build passaram. Nao adianta subir o
+    # projeto se o codigo nem compila.
     needs: [build_and_test_api, build_and_test_frontend]
-    # Generoso de propósito: no CI o bulguns minutos.
+    # Generoso de proposito: no CI o build e sempre frio e leva alguns minutos.
     timeout-minutes: 20
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Sobe o compose inteiro, aplica toda entidade
-      # tem migração correspondente, e que /health responde.
+      # Sobe o compose inteiro, aplica as migracoes, confere que toda entidade
+      # tem migracao correspondente, e que /health responde.
       #
-      # Pega a classe de erro que lint, teste unitário e build não pegam:
-      # módulo não registrado, rota que estoura, entidade sem tabela.
-      - name: Sobe o projeto, aplica asde
+      # Pega a classe de erro que lint, teste unitario e build nao pegam:
+      # modulo nao registrado, rota que estoura, entidade sem tabela.
+      - name: Sobe o projeto, aplica as migracoes e confere a saude
         run: make smoke
 
   # ============================================================================
@@ -118,10 +118,10 @@ jobs:
   deploy:
     name: Deploy Application
     runs-on: ubuntu-latest
-    # Aguarda a validação com sucesso da API, do Frontend e do smoke test
-    needs: [build_and_test_api, build_a
+    # Aguarda a validação com sucesso tanto da API quanto do Frontend
+    needs: [build_and_test_api, build_and_test_frontend, smoke]
     # Executa apenas se o evento for um push na branch main (não roda em PRs)
-    if: github.ref == 'refs/heads/main'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -129,4 +129,4 @@ jobs:
       - name: Deploy placeholder
         run: |
           echo "Todos os testes e builds passaram com sucesso!"
-          echo "Etapa de deploy pronta nte de produção."
+          echo "Etapa de deploy pronta para configuração do ambiente de produção."
