@@ -1,53 +1,54 @@
 #!/usr/bin/env bash
-# Espera um servico ficar de pe antes de seguir adiante.
+# Waits for a service to be up before moving on.
 #
-# O 'docker compose up' termina quando os conteineres FORAM INICIADOS, e nao
-# quando eles ja estao respondendo. Subir a API leva alguns segundos a mais que
-# isso. Sem esta espera, quem roda 'make up' abre o navegador cedo demais, ve um
-# erro de conexao e acha que quebrou -- quando so faltava esperar.
+# 'docker compose up' finishes when the containers HAVE BEEN STARTED, not when
+# they are already answering. Starting the API takes a few more seconds than
+# that. Without this wait, whoever runs 'make up' opens the browser too early,
+# sees a connection error and thinks something broke, when all that was missing
+# was a little patience.
 #
-# Uso:
-#   wait-for.sh http://localhost:8080/health  "API"   [segundos]
-#   wait-for.sh localhost:5432                "banco" [segundos]
+# Usage:
+#   wait-for.sh http://localhost:8080/health  "the API"   [seconds]
+#   wait-for.sh localhost:5432                "the database" [seconds]
 
 set -euo pipefail
 
-ALVO="${1:?informe a URL ou host:porta}"
-NOME="${2:-$ALVO}"
-LIMITE="${3:-90}"
+TARGET="${1:?pass a URL or host:port}"
+NAME="${2:-$TARGET}"
+LIMIT="${3:-90}"
 
-vermelho() { printf '\033[31m%s\033[0m\n' "$1"; }
-verde()    { printf '\033[32m%s\033[0m\n' "$1"; }
+red()   { printf '\033[31m%s\033[0m\n' "$1"; }
+green() { printf '\033[32m%s\033[0m\n' "$1"; }
 
-responde() {
-  if [[ "$ALVO" == http://* || "$ALVO" == https://* ]]; then
-    curl --silent --fail --max-time 2 --output /dev/null "$ALVO"
+answers() {
+  if [[ "$TARGET" == http://* || "$TARGET" == https://* ]]; then
+    curl --silent --fail --max-time 2 --output /dev/null "$TARGET"
   else
-    local host="${ALVO%%:*}"
-    local porta="${ALVO##*:}"
-    # /dev/tcp e um recurso do proprio bash: abrir esse "arquivo" tenta uma
-    # conexao TCP. Serve para testar porta sem depender de nc ou telnet.
-    (exec 3<>"/dev/tcp/$host/$porta") 2>/dev/null
+    local host="${TARGET%%:*}"
+    local port="${TARGET##*:}"
+    # /dev/tcp is a bash feature: opening that "file" attempts a TCP connection.
+    # It lets us test a port without depending on nc or telnet.
+    (exec 3<>"/dev/tcp/$host/$port") 2>/dev/null
   fi
 }
 
-printf 'Esperando %s (ate %ss)' "$NOME" "$LIMITE"
+printf 'Waiting for %s (up to %ss)' "$NAME" "$LIMIT"
 
-decorrido=0
-while ! responde; do
-  if [ "$decorrido" -ge "$LIMITE" ]; then
+elapsed=0
+while ! answers; do
+  if [ "$elapsed" -ge "$LIMIT" ]; then
     echo
-    vermelho "$NOME nao respondeu em ${LIMITE}s."
+    red "$NAME did not answer within ${LIMIT}s."
     echo
-    echo "O que fazer:"
-    echo "  1. 'make ps'    -- ver se o conteiner esta de pe"
-    echo "  2. 'make logs'  -- ver o erro que impediu ele de subir"
+    echo "What to do:"
+    echo "  1. 'make ps'    -- check whether the container is up"
+    echo "  2. 'make logs'  -- see the error that stopped it from starting"
     exit 1
   fi
   printf '.'
   sleep 2
-  decorrido=$((decorrido + 2))
+  elapsed=$((elapsed + 2))
 done
 
 echo
-verde "$NOME respondendo."
+green "$NAME is answering."

@@ -69,7 +69,7 @@ describe('UsuariosService', () => {
     expect(resposta.email).toBe('teste.maiusculo@email.com');
   });
 
-  it('não deve conter a propriedade senha_hash no JSON retornado', async () => {
+  it('não deve conter a propriedade password_hash no JSON retornado', async () => {
     vi.spyOn(repositoryMock, 'findByEmail').mockResolvedValue(null);
     vi.spyOn(repositoryMock, 'create').mockImplementation(async (data) => {
       return {

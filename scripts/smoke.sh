@@ -1,97 +1,105 @@
 #!/usr/bin/env bash
-# Sobe o projeto de verdade, aplica as migrações e confere que a aplicação responde.
+# Boots the project for real, applies migrations and checks that the app answers.
 #
-# Por que isto existe: lint, teste unitário e build não sobem a aplicação contra
-# um banco. Então um Pull Request pode deixar tudo verde e mesmo assim quebrar
-# em execução, por módulo não registrado, rota que estoura, ou entidade sem a
-# migração correspondente.
+# Why this exists: lint, unit tests and build never start the application against
+# a database. So a pull request can be fully green and still break at runtime:
+# a module that was not registered, a route that throws, or an entity with no
+# matching migration. That has already happened twice in this project.
 #
-# Este script é rodado pelo CI. Ele foi escrito para nunca dar falso positivo:
-# qualquer etapa que não possa ser comprovada derruba o script.
+# The CI runs this script. It is written to never report a false pass: any step
+# that cannot be proven brings the whole thing down.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-vermelho() { printf '\033[31m%s\033[0m\n' "$1"; }
-verde()    { printf '\033[32m%s\033[0m\n' "$1"; }
+red()   { printf '\033[31m%s\033[0m\n' "$1"; }
+green() { printf '\033[32m%s\033[0m\n' "$1"; }
 
-limpar() { docker compose down -v --remove-orphans >/dev/null 2>&1 || true; }
+cleanup() { docker compose down -v --remove-orphans >/dev/null 2>&1 || true; }
 
-falhar() {
+fail() {
   echo
-  vermelho "SMOKE TEST FALHOU: $1"
+  red "SMOKE TEST FAILED: $1"
   echo
   [ $# -gt 1 ] && { echo "$2"; echo; }
-  echo "--- últimas linhas do log da API ---"
+  echo "--- last lines of the API log ---"
   docker compose logs --tail 60 api 2>&1 || true
-  echo "--- estado dos contêineres ---"
+  echo "--- container status ---"
   docker compose ps 2>&1 || true
-  limpar
+  cleanup
   exit 1
 }
 
 [ -f .env ] || cp .env.example .env
-API_PORT=$(grep -E '^API_PORT=' .env | cut -d= -f2 | tr -d '[:space:]')
-API_PORT=${API_PORT:-8080}
+API_PORT=$(grep -E '^API_PORT=' .env | cut -d= -f2 | tr -d '[:space:]'); API_PORT=${API_PORT:-8080}
+DB_USER=$(grep -E '^POSTGRES_USER=' .env | cut -d= -f2 | tr -d '[:space:]')
+DB_NAME=$(grep -E '^POSTGRES_DB=' .env | cut -d= -f2 | tr -d '[:space:]')
 
-# Começa sempre do zero. Volume sobrando de uma execução anterior esconde
-# migração faltando, porque a tabela já existe de antes.
-echo "1/5  Limpando o que possa ter sobrado"
-limpar
+# Always start from scratch. A volume left over from an earlier run hides a
+# missing migration, because the table is already there from before.
+echo "1/6  Cleaning up anything left over"
+cleanup
 
-echo "2/5  Subindo os serviços e esperando ficarem saudáveis"
-# --wait faz o compose esperar as verificações de saúde, em vez de devolver o
-# terminal assim que os contêineres iniciam. Sem isso, os passos seguintes
-# correm contra um banco que ainda está subindo.
-docker compose up -d --build --wait --wait-timeout 240 \
-  || falhar "os serviços não ficaram saudáveis em 240s"
+# Building is deliberately separate from starting, and deliberately not on a
+# timer. A cold build with new dependencies can take minutes, and in CI every
+# build is cold. Timing the two together made this script fail on good code.
+echo "2/6  Building the images (no time limit, a cold build is slow)"
+docker compose build || fail "the images did not build"
 
-# Cinto e suspensório: mesmo com --wait, confirma que a API atende de fato.
-bash scripts/wait-for.sh "http://localhost:${API_PORT}/health" "a API" 120 >/dev/null \
-  || falhar "a API subiu mas não atendeu em /health"
+echo "3/6  Starting the services and waiting for them to be healthy"
+# --wait makes compose wait for the health checks instead of returning as soon
+# as the containers start. Without it the next steps race a database that is
+# still coming up. The timer here covers startup only, never the build.
+docker compose up -d --wait --wait-timeout 180 \
+  || fail "the services did not become healthy within 180s of starting"
 
-echo "3/5  Aplicando as migrações"
-docker compose exec -T api npm run migration:run --silent > /tmp/yj-migracoes.txt 2>&1 \
-  || falhar "as migrações falharam" "$(grep -viE '^query:' /tmp/yj-migracoes.txt | tail -25)"
+# Belt and braces: even with --wait, confirm the API actually answers.
+bash scripts/wait-for.sh "http://localhost:${API_PORT}/health" "the API" 120 >/dev/null \
+  || fail "the API started but did not answer on /health"
 
-# Prova que elas realmente rodaram, em vez de terem falhado em silêncio.
-APLICADAS=$(docker compose exec -T postgres psql -U "$(grep -E '^POSTGRES_USER=' .env | cut -d= -f2)" \
-  -d "$(grep -E '^POSTGRES_DB=' .env | cut -d= -f2)" -tAc 'SELECT count(*) FROM migrations;' 2>/dev/null | tr -d '[:space:]')
-case "$APLICADAS" in
-  ''|*[!0-9]*) falhar "não consegui ler a tabela de migrações" "Resposta do banco: '${APLICADAS}'" ;;
+echo "4/6  Applying migrations"
+docker compose exec -T api npm run migration:run --silent > /tmp/yj-migrations.txt 2>&1 \
+  || fail "migrations failed" "$(grep -viE '^query:' /tmp/yj-migrations.txt | tail -25)"
+
+# Prove they really ran, instead of having failed silently.
+APPLIED=$(docker compose exec -T postgres psql -U "$DB_USER" -d "$DB_NAME" \
+  -tAc 'SELECT count(*) FROM migrations;' 2>/dev/null | tr -d '[:space:]')
+case "$APPLIED" in
+  ''|*[!0-9]*) fail "could not read the migrations table" "Database answered: '${APPLIED}'" ;;
 esac
-[ "$APLICADAS" -ge 1 ] || falhar "nenhuma migração foi aplicada" "A tabela migrations existe e está vazia."
-echo "     $APLICADAS migração(ões) aplicada(s)"
+[ "$APPLIED" -ge 1 ] || fail "no migration was applied" "The migrations table exists and is empty."
+echo "     $APPLIED migration(s) applied"
 
-echo "4/5  Conferindo que as entidades batem com as migrações"
-SAIDA=$(docker compose exec -T api sh -c \
+echo "5/6  Checking that entities match the migrations"
+OUTPUT=$(docker compose exec -T api sh -c \
   './node_modules/.bin/typeorm-ts-node-esm migration:generate -d src/database/data-source.ts src/database/migrations/__DRIFT__ 2>&1' || true)
 
-if echo "$SAIDA" | grep -q 'No changes in database schema were found'; then
-  : # entidades e migrações batem
-elif echo "$SAIDA" | grep -q 'has been generated successfully'; then
+if echo "$OUTPUT" | grep -q 'No changes in database schema were found'; then
+  : # entities and migrations agree
+elif echo "$OUTPUT" | grep -q 'has been generated successfully'; then
   docker compose exec -T api sh -c 'rm -f src/database/migrations/*__DRIFT__*.ts' >/dev/null 2>&1 || true
-  falhar "existe entidade sem migração" \
-"Alguma entidade foi criada ou alterada sem a migração correspondente.
+  fail "there is an entity with no migration" \
+"An entity was added or changed without the matching migration.
 
-O projeto roda com synchronize desligado, então o TypeORM não cria tabela sozinho.
-Sem a migração, a tabela não existe e a consulta estoura em execução.
+The project runs with synchronize turned off, so TypeORM never creates a table
+on its own. Without the migration the table does not exist and the query blows
+up at runtime.
 
-Para gerar a migração que falta:
+To generate the missing migration:
 
-  make migration-generate NOME=CreateSomethingTable
+  make migration-generate NAME=CreateSomethingTable
 
-Confira o arquivo gerado e faça commit dele junto com a entidade."
+Review the generated file and commit it together with the entity."
 else
-  falhar "não consegui verificar as entidades" "$(echo "$SAIDA" | grep -viE '^query:' | tail -25)"
+  fail "could not verify the entities" "$(echo "$OUTPUT" | grep -viE '^query:' | tail -25)"
 fi
 
-echo "5/5  Conferindo a resposta de /health"
-RESP=$(curl -s --max-time 10 "http://localhost:${API_PORT}/health") \
-  || falhar "não consegui chamar /health"
-echo "$RESP" | grep -q '"status":"ok"' \
-  || falhar "resposta inesperada em /health" "Recebido: $RESP"
+echo "6/6  Checking the /health response"
+RESPONSE=$(curl -s --max-time 10 "http://localhost:${API_PORT}/health") \
+  || fail "could not call /health"
+echo "$RESPONSE" | grep -q '"status":"ok"' \
+  || fail "unexpected response from /health" "Got: $RESPONSE"
 
 echo
-verde "SMOKE TEST PASSOU: serviços saudáveis, $APLICADAS migração(ões) aplicada(s), entidades em dia, /health respondendo."
-limpar
+green "SMOKE TEST PASSED: services healthy, $APPLIED migration(s) applied, entities in sync, /health answering."
+cleanup

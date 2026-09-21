@@ -1,41 +1,42 @@
 #!/usr/bin/env bash
-# Confere tudo o que precisa existir ANTES de tentar subir o projeto.
-# A ideia e falhar aqui, com uma mensagem que diz o que fazer, em vez de
-# falhar dez linhas depois com um erro do Docker que nao explica nada.
+# Checks everything that has to be in place BEFORE trying to start the project.
+#
+# The idea is to fail here, with a message that says what to do, instead of
+# failing ten lines later with a Docker error that explains nothing.
 
 set -euo pipefail
 
-RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-vermelho() { printf '\033[31m%s\033[0m\n' "$1"; }
-verde()    { printf '\033[32m%s\033[0m\n' "$1"; }
+red()   { printf '\033[31m%s\033[0m\n' "$1"; }
+green() { printf '\033[32m%s\033[0m\n' "$1"; }
 
-falhar() {
-  vermelho "FALTA ALGO: $1"
+fail() {
+  red "SOMETHING IS MISSING: $1"
   echo
-  echo "Como resolver:"
+  echo "How to fix it:"
   echo "  $2"
   exit 1
 }
 
 if ! command -v docker >/dev/null 2>&1; then
-  falhar "o Docker nao esta instalado." \
-         "Instale o Docker Desktop: https://docs.docker.com/get-started/get-docker/"
+  fail "Docker is not installed." \
+       "Install Docker Desktop: https://docs.docker.com/get-started/get-docker/"
 fi
 
 if ! docker info >/dev/null 2>&1; then
-  falhar "o Docker esta instalado, mas nao esta rodando." \
-         "Abra o Docker Desktop e espere ele terminar de iniciar. Depois rode 'make up' de novo."
+  fail "Docker is installed but not running." \
+       "Open Docker Desktop, wait for it to finish starting, then run 'make up' again."
 fi
 
 if ! docker compose version >/dev/null 2>&1; then
-  falhar "o plugin 'docker compose' nao foi encontrado." \
-         "Atualize o Docker Desktop, que ja vem com ele. Atencao: 'docker-compose' com hifen e a versao antiga."
+  fail "the 'docker compose' plugin was not found." \
+       "Update Docker Desktop, which ships with it. Careful: 'docker-compose' with a hyphen is the old version."
 fi
 
-if [ ! -f "$RAIZ/.env" ]; then
-  falhar "o arquivo .env nao existe." \
-         "Rode 'make setup' (ou 'cp .env.example .env') e preencha o que for necessario."
+if [ ! -f "$ROOT/.env" ]; then
+  fail "the .env file does not exist." \
+       "Run 'make setup' (or 'cp .env.example .env') and fill in what you need."
 fi
 
-verde "Pre-requisitos OK: Docker rodando, compose disponivel e .env no lugar."
+green "Prerequisites OK: Docker running, compose available, .env in place."
