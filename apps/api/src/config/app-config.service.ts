@@ -31,4 +31,12 @@ export class AppConfigService {
   get databaseUrl(): string {
     return this.config.get('DATABASE_URL', { infer: true });
   }
+
+  get confirmationCodeTtlMinutes(): number {
+    return this.config.get('CONFIRMATION_CODE_TTL_MINUTES', { infer: true });
+  }
+
+  get confirmationCodeMaxAttempts(): number {
+    return this.config.get('CONFIRMATION_CODE_MAX_ATTEMPTS', { infer: true });
+  }
 }

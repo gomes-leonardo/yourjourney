@@ -2,6 +2,7 @@ import { Injectable, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UsersRepository } from '../users/users.repository.js';
 import { UserResponseDto } from '../users/dto/user-response.dto.js';
+import { EmailConfirmationService } from '../email-confirmation/email-confirmation.service.js';
 import { RegisterDto } from './dto/register.dto.js';
 import { EmailService } from './email.service.js';
 
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     private readonly usersRepository: UsersRepository,
     private readonly emailService: EmailService,
+    private readonly emailConfirmationService: EmailConfirmationService,
   ) {}
 
   /**
@@ -53,7 +55,9 @@ export class AuthService {
     });
 
     // 4. Gera o código de confirmação e envia o e-mail de forma assíncrona (não-bloqueante)
-    const codigoConfirmacao = this.emailService.generateConfirmationCode();
+    const codigoConfirmacao = await this.emailConfirmationService.issue(
+      novoUsuario.id,
+    );
     void this.emailService.sendConfirmationCode(
       emailNormalizado,
       codigoConfirmacao,

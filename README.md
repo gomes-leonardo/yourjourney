@@ -942,6 +942,8 @@ seu `.env`, que o Git ignora.
 | `POSTGRES_USER` | Usuário do banco. | `yourjourney` |
 | `POSTGRES_PASSWORD` | Senha do banco no ambiente local. | `yourjourney_local` |
 | `POSTGRES_DB` | Nome do banco. | `yourjourney` |
+| `CONFIRMATION_CODE_TTL_MINUTES` | Quantos minutos o código de confirmação de e-mail vale. | `10` |
+| `CONFIRMATION_CODE_MAX_ATTEMPTS` | Quantos chutes errados o aluno tem antes de o código ser invalidado. | `5` |
 
 > As três portas existem para poder escapar de conflito. Se outro projeto seu já ocupa a
 > `5432`, troque aqui em vez de parar o outro projeto — foi para isso que a variável

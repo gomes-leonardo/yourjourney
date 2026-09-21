@@ -4,12 +4,14 @@ import * as bcrypt from 'bcrypt';
 import { AuthService } from './auth.service.js';
 import { UsersRepository } from '../users/users.repository.js';
 import { EmailService } from './email.service.js';
+import { EmailConfirmationService } from '../email-confirmation/email-confirmation.service.js';
 import { User } from '../users/models/user.entity.js';
 
 describe('AuthService', () => {
   let service: AuthService;
   let usersRepositoryMock: UsersRepository;
   let emailServiceMock: EmailService;
+  let emailConfirmationServiceMock: EmailConfirmationService;
 
   beforeEach(() => {
     usersRepositoryMock = {
@@ -18,11 +20,18 @@ describe('AuthService', () => {
     } as unknown as UsersRepository;
 
     emailServiceMock = {
-      generateConfirmationCode: vi.fn().mockReturnValue('123456'),
       sendConfirmationCode: vi.fn().mockResolvedValue(true),
     } as unknown as EmailService;
 
-    service = new AuthService(usersRepositoryMock, emailServiceMock);
+    emailConfirmationServiceMock = {
+      issue: vi.fn().mockResolvedValue('123456'),
+    } as unknown as EmailConfirmationService;
+
+    service = new AuthService(
+      usersRepositoryMock,
+      emailServiceMock,
+      emailConfirmationServiceMock,
+    );
   });
 
   it('deve realizar cadastro válido com e-mail minúsculo, senha bcrypt e email_confirmed_at nulo', async () => {
@@ -74,7 +83,9 @@ describe('AuthService', () => {
     expect(resultado.email_confirmed_at).toBeNull();
 
     // E-mail disparado assincronamente
-    expect(emailServiceMock.generateConfirmationCode).toHaveBeenCalled();
+    expect(emailConfirmationServiceMock.issue).toHaveBeenCalledWith(
+      'uuid-aluno-1',
+    );
     expect(emailServiceMock.sendConfirmationCode).toHaveBeenCalledWith(
       'carlos.eduardo@email.com',
       '123456',
