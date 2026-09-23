@@ -23,6 +23,7 @@
     "migration:revert": "./node_modules/.bin/typeorm-ts-node-esm migration:revert -d src/database/data-source.ts",
     "migration:show": "./node_modules/.bin/typeorm-ts-node-esm migration:show -d src/database/data-source.ts",
     "migration:generate": "./node_modules/.bin/typeorm-ts-node-esm migration:generate -d src/database/data-source.ts",
+    "spike:rag": "tsx scripts/spike-rag.ts",
     "format:check": "prettier --check ."
   },
   "dependencies": {
@@ -35,6 +36,8 @@
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "dotenv": "^18.0.3",
+    "pdf-parse": "^2.4.5",
     "pg": "^8.23.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
@@ -47,7 +50,7 @@
     "@nestjs/testing": "^12.0.1",
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.0",
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.13.6",
     "@types/pg": "^8.23.1",
     "@vitest/coverage-v8": "^4.1.2",
     "oxlint": "^1.58.0",
