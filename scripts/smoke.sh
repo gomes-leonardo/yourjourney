@@ -61,6 +61,10 @@ echo "4/6  Applying migrations"
 docker compose exec -T api npm run migration:run --silent > /tmp/yj-migrations.txt 2>&1 \
   || fail "migrations failed" "$(grep -viE '^query:' /tmp/yj-migrations.txt | tail -25)"
 
+echo "     Running database integration tests"
+docker compose exec -T api npm run test:integration \
+  || fail "database integration tests failed"
+
 # Prove they really ran, instead of having failed silently.
 APPLIED=$(docker compose exec -T postgres psql -U "$DB_USER" -d "$DB_NAME" \
   -tAc 'SELECT count(*) FROM migrations;' 2>/dev/null | tr -d '[:space:]')
