@@ -6,6 +6,11 @@
   --fundo-codigo: #f4f4f5;
   --verde: #15803d;
   --vermelho: #b91c1c;
+  --acento: #0f4c47;
+  --painel-escuro: #0f2e2b;
+  --fonte-titulo: var(--font-newsreader), Georgia, 'Times New Roman', serif;
+  --fonte-interface:
+    var(--font-ibm-plex-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,10 +33,6 @@ body {
   margin: 0;
   background: var(--fundo);
   color: var(--texto);
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    sans-serif;
+  font-family: var(--fonte-interface);
   line-height: 1.5;
 }

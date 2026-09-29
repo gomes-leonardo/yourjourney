@@ -1,0 +1,512 @@
+.pagina {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(420px, 47%) 1fr;
+  background: #fff;
+}
+
+.apresentacao {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 56px;
+  color: #f6f8f5;
+  background: var(--painel-escuro);
+}
+
+.marca {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+
+.mensagem {
+  max-width: 470px;
+  margin: auto 0;
+  transform: translateY(-4px);
+}
+
+.mensagem h1 {
+  margin: 0 0 25px;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.5rem, 4vw, 3.45rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.mensagem > p {
+  max-width: 420px;
+  margin: 0;
+  color: #a8c1bd;
+  font-size: 0.97rem;
+  line-height: 1.7;
+}
+
+.beneficios {
+  display: grid;
+  gap: 16px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #d6e2df;
+  font-size: 0.92rem;
+}
+
+.beneficios li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icone {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  color: #7fb4ad;
+}
+
+.icone svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.35;
+}
+
+.rodape {
+  margin: 0;
+  color: #8baaa5;
+  font-size: 0.8rem;
+}
+
+.cadastro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 10%;
+}
+
+.formulario {
+  width: min(100%, 386px);
+}
+
+.formulario h2 {
+  margin: 0;
+  color: #111;
+  font-family: var(--fonte-titulo);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.introducao {
+  margin: 8px 0 28px;
+  color: #797b7c;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.campo {
+  display: grid;
+  gap: 6px;
+  min-height: 76px;
+  margin-bottom: 15px;
+}
+
+.campo label {
+  color: #161717;
+  font-size: 0.8rem;
+}
+
+.campo input {
+  width: 100%;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid #dedfdd;
+  border-radius: 8px;
+  outline: none;
+  color: #262827;
+  background: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.campo input::placeholder {
+  color: #a7a9a8;
+}
+
+.campo input:focus {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px rgb(15 76 71 / 12%);
+}
+
+.campo input[aria-invalid='true'] {
+  border-color: #bd5d54;
+}
+
+.ajuda {
+  color: #8e918f;
+  font-size: 0.72rem;
+}
+
+.erro {
+  display: block;
+  min-height: 1.1em;
+  color: #a84942;
+  font-size: 0.72rem;
+}
+
+.campo {
+  position: relative;
+}
+
+.campo > .erro {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+}
+
+.termosGrupo {
+  position: relative;
+  min-height: 47px;
+}
+
+.termosGrupo > .erro {
+  position: absolute;
+  top: calc(100% - 22px);
+  left: 26px;
+}
+
+.termos {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 3px 0 25px;
+  color: #5f6361;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.termos input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.checkbox {
+  display: grid;
+  flex: 0 0 17px;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #0e5b55;
+  border-radius: 2px;
+  color: transparent;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.termos input:checked + .checkbox {
+  color: #fff;
+  background: #0f625b;
+}
+
+.termos input:focus-visible + .checkbox {
+  outline: 2px solid #8bbab4;
+  outline-offset: 2px;
+}
+
+.termos a,
+.entrar a {
+  color: #526c68;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link {
+  padding: 0;
+  border: 0;
+  color: #526c68;
+  background: transparent;
+  font: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.formulario button {
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--acento);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.formulario button:hover {
+  background: #0b4e49;
+}
+
+.formulario button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.formulario button:disabled:not([aria-busy='true']) {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.formulario button:active {
+  transform: translateY(1px);
+}
+
+.sucesso {
+  margin: 10px 0 0;
+  color: #26715a;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.erroGeral {
+  margin: 10px 0 0;
+  color: #a84942;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.erroGeral a {
+  color: #526c68;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.entrar {
+  margin: 15px 0 0;
+  color: #909290;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.modalOverlay {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgb(7 30 28 / 58%);
+}
+
+.modal {
+  display: grid;
+  width: min(100%, 542px);
+  max-height: min(600px, calc(100vh - 48px));
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 18px 55px rgb(0 0 0 / 22%);
+}
+
+.modalCabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 26px 20px;
+  border-bottom: 1px solid #e2e4e2;
+}
+
+.modalCabecalho h2 {
+  margin: 0;
+  color: #171918;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.modalFechar {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  color: #5d6260;
+  background: #f6f7f6;
+  font: inherit;
+  font-size: 1.55rem;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modalFechar:hover,
+.modalFechar:focus-visible {
+  color: #123f3a;
+  background: #e9efed;
+}
+
+.modalConteudo {
+  overflow-y: auto;
+  padding: 20px 26px 24px;
+  color: #686d6b;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.modalConteudo h3 {
+  margin: 0 0 5px;
+  color: #1c201f;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.modalConteudo p {
+  margin: 0 0 18px;
+}
+
+.modalConteudo p:last-child {
+  margin-bottom: 0;
+}
+
+.modalAcoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 26px 20px;
+  border-top: 1px solid #e2e4e2;
+}
+
+.modalAcoes button {
+  min-width: 84px;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modalCancelar {
+  border: 1px solid #e1e4e2;
+  color: #303533;
+  background: #fff;
+}
+
+.modalAceitar {
+  border: 1px solid #105d57;
+  color: #fff;
+  background: #105d57;
+}
+
+.modalCancelar:hover,
+.modalCancelar:focus-visible {
+  background: #f5f7f6;
+}
+
+.modalAceitar:hover,
+.modalAceitar:focus-visible {
+  background: #0b4e49;
+}
+
+.modalAcoes button:focus-visible,
+.link:focus-visible {
+  outline: 2px solid #73aaa3;
+  outline-offset: 2px;
+}
+
+@media (max-width: 390px) {
+  .pagina {
+    display: block;
+  }
+
+  .apresentacao {
+    min-height: auto;
+    padding: 26px 24px 0;
+    color: #171918;
+    background: #fff;
+  }
+
+  .mensagem {
+    margin: 7px 0 0;
+  }
+
+  .mensagem h1 {
+    display: none;
+  }
+
+  .mensagem > p {
+    max-width: none;
+    color: #707472;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .beneficios,
+  .rodape {
+    display: none;
+  }
+
+  .marca {
+    font-size: 1.2rem;
+  }
+
+  .cadastro {
+    align-items: flex-start;
+    padding: 24px 24px 48px;
+  }
+
+  .formulario h2 {
+    font-size: 2rem;
+  }
+
+  .introducao {
+    margin-top: 9px;
+    margin-bottom: 29px;
+  }
+
+  .modalOverlay {
+    padding: 16px;
+  }
+
+  .modal {
+    max-height: calc(100vh - 32px);
+  }
+
+  .modalCabecalho,
+  .modalConteudo,
+  .modalAcoes {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .modalCabecalho h2 {
+    font-size: 1.35rem;
+  }
+}

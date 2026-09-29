@@ -1,0 +1,24 @@
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(420px, 47%) 1fr;
+  background: #fff;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 10%;
+}
+
+@media (max-width: 390px) {
+  .layout {
+    display: block;
+  }
+
+  .content {
+    align-items: flex-start;
+    padding: 24px;
+  }
+}
