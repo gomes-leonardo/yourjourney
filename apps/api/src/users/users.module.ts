@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { CurrentUserModule } from '../current-user/current-user.module.js';
 import { User } from './models/user.entity.js';
+import { MeController } from './me.controller.js';
 import { UsersController } from './users.controller.js';
 import { UsersService } from './users.service.js';
 import { UsersRepository } from './users.repository.js';
@@ -19,8 +21,8 @@ import { UsersRepository } from './users.repository.js';
  *   possam injetá-los quando precisarem consultar dados do usuário.
  */
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
-  controllers: [UsersController],
+  imports: [TypeOrmModule.forFeature([User]), CurrentUserModule],
+  controllers: [UsersController, MeController],
   providers: [UsersService, UsersRepository],
   exports: [UsersService, UsersRepository],
 })
